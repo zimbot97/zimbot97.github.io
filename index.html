@@ -1,181 +1,220 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f2f3fb" />
-    <title>Brian Lai</title>
-    <meta
-      name="description"
-      content="A one-page personal about me website built using HTML, CSS, and JavaScript. It is a simple and clean design, with a focus on showcasing your existing social media following."
-    />
-    <meta
-      name="keywords"
-      content="Personal portfolio, Personal portfolio website, rakeshid03, Creative portfolio, Professional portfolio, Rakesh Chowdhury's Personal portfolio, Developer portfolio, Personal portfolio ui design, Personal portfolio source code, Personal portfolio using html, css, javascript, clean and simple personal portfolio"
-    />
-    <link rel="canonical" href="rakeshid03.github.io/about-me/" />
-    <meta name="author" content="Rakeshid03" />
+<!--
+  GitHub Pages single-file site (index.html)
+  Instructions:
+  1. Save this file as `index.html` at the root of your GitHub repository.
+  2. Add your resume file as `resume.pdf` in the same repo (or change the link below).
+  3. Commit and push to GitHub. Enable Pages from Settings -> Pages and select branch `main` (root) or `gh-pages` if you prefer.
+  4. Customize texts, project links, images, and icons as needed.
+-->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Robotics Portfolio — Brian Lai</title>
+  <meta name="description" content="Robotics portfolio and resume — navigation, perception, simulation, and ROS projects." />
+  <style>
+    :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#6ee7b7}
+    *{box-sizing:border-box}
+    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;color:#e6eef6;background:linear-gradient(180deg,#071428 0%, var(--bg) 100%)}
+    a{color:var(--accent);text-decoration:none}
+    .wrap{max-width:1100px;margin:32px auto;padding:24px}
+    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
+    .brand{display:flex;gap:12px;align-items:center}
+    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#0ea5a4,#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:700;color:#042028}
+    nav a{margin-left:18px;font-weight:600;font-size:14px;color:var(--muted)}
+    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;margin-bottom:28px}
+    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+    h1{margin:0;font-size:30px}
+    p.lead{color:var(--muted);margin-top:10px;line-height:1.5}
+    .ctas{margin-top:16px;display:flex;gap:12px}
+    .btn{padding:10px 14px;border-radius:10px;font-weight:700;border:none;cursor:pointer}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#34d399);color:#042028}
+    .btn-ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04)}
+    .skills{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+    .chip{background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
 
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto&display=swap"
-      rel="stylesheet"
-    />
-    <link href="assets/style/style.css" rel="stylesheet" />
-    <!-- Unpkg for card scroll reveal effect -->
-    <script src="https://unpkg.com/scrollreveal"></script>
-  </head>
-  <body>
-    <div class="wrapper">
-      <div class="container">
-        <!----Picture and name---->
-        <div class="picture">
-          <img
-            src="assets/profile-picture.webp"
-            alt="Brian Lai's photo"
-          />
-        </div>
-        <!--On loading name effect-->
-        <div class="name" translate="no">
-         <span><span>Brian</span></span><span><span> Lai</span></span>
-        </div>
+    /* Projects grid */
+    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+    .project-title{font-size:16px;margin:0}
+    .meta{color:var(--muted);font-size:13px;margin-top:8px}
+    .proj-img{height:130px;border-radius:8px;background:linear-gradient(135deg,#072033,#0b1320);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
 
-        <!----Few personal detail---->
-        <!--more details button-->
-        <div class="info-box">
-          About me
-          <div class="toggle" onclick="vibrate()">
-            <i class="fa-solid fa-chevron-down"></i>
-          </div>
-          <!--details-->
-          <div>
-            <br />
-            <div class="details">
-              <ul>
-                <li class="about">
-                  Hello, I’m Rakesh Chowdhury, but most people call me 'RC'. I
-                  am a web developer, multimedia editor, and meme star. I was
-                  born and raised in Kolkata, West Bengal, and am still living
-                  here. When I am not busy at work, you will find me making
-                  hilarious memes, clicking amazing photos, playing mobile
-                  games, drawing my imagination on paper and watching movies and
-                  series. I believe the best way to learn anything is to have
-                  fun, which is why I try to infuse humor into everything I do.
-                  Be it websites, videos, memes or life, you can always look
-                  forward to a good day when you are with me.
-                  <br /><br />
-                  Please don't hesitate to connect with me on every major social
-                  media platform with my username @rakeshid03.
-                </li>
-                <li>
-                  <b>Projects:</b>
-                  <div class="projects">
-                    <a
-                      href="https://rakeshid03.github.io/Where-is-my-pet/"
-                      class="project"
-                    >
-                      <i class="fa-solid fa-file"></i>
-                      <ul>
-                        <li>Where Is My Pet?</li>
-                        <li><small>Created 27.04.2023</small></li>
-                      </ul>
-                    </a>
+    /* Resume & contact */
+    .two-col{display:grid;grid-template-columns:1fr 360px;gap:18px}
+    .resume-card{display:flex;flex-direction:column;gap:12px}
+    .download{display:inline-flex;align-items:center;gap:8px}
 
-                    <a
-                      href="https://rakeshid03.github.io/digital-fingerprint/"
-                      class="project"
-                    >
-                      <i class="fa-solid fa-file"></i>
-                      <ul>
-                        <li>Digital Fingerprint</li>
-                        <li><small>Created 10.04.2023</small></li>
-                      </ul>
-                    </a>
+    footer{margin-top:36px;color:var(--muted);font-size:13px;text-align:center}
 
-                    <a
-                      href="https://rakeshid03.github.io/Monsterio/"
-                      class="project"
-                    >
-                      <i class="fa-solid fa-file"></i>
-                      <ul>
-                        <li>Monsterio</li>
-                        <li><small>Created 14.09.2022</small></li>
-                      </ul>
-                    </a>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-        <!----All social media buttons---->
-        <div class="social-media">
-          <a href="mailto:Rakeshid03@gmail.com">
-            <div><i class="fa-solid fa-envelope"></i>Email</div>
-          </a>
-          <a href="https://www.facebook.com/rakeshid03"
-            ><div><i class="fa-brands fa-facebook-f"></i>Facebook</div>
-          </a>
-          <a href="https://instagram.com/Rakeshid03"
-            ><div><i class="fa-brands fa-instagram"></i>Instagram</div>
-          </a>
-          <a href="https://twitter.com/Rakeshid03"
-            ><div><i class="fa-brands fa-x-twitter"></i>Twitter</div>
-          </a>
-          <a href="https://github.com/rakeshid03">
-            <div><i class="fa-brands fa-github"></i>Github</div>
-          </a>
-          <a href="https://youtube.com/channel/UC9QQOQ4DGeSdLuKTZ1nXTAg"
-            ><div><i class="fa-brands fa-youtube"></i>YouTube</div>
-          </a>
-          <a href="https://www.linkedin.com/mwlite/in/rakeshid03"
-            ><div><i class="fa-brands fa-linkedin-in"></i>LinkedIn</div>
-          </a>
-          <a href="https://codepen.io/Rakeshid03"
-            ><div><i class="fa-brands fa-codepen"></i>Codepen</div>
-          </a>
-          <a href="https://www.deviantart.com/rakeshid03">
-            <div><i class="fa-brands fa-deviantart"></i>Deviantart</div>
-          </a>
-          <a href="https://in.pinterest.com/rakeshid03/">
-            <div><i class="fa-brands fa-pinterest"></i>Pinterest</div>
-          </a>
-          <a href="https://www.flickr.com/photos/196287688@N08/albums/">
-            <div><i class="fa-brands fa-flickr"></i>Flickr</div>
-          </a>
-          <a href="https://stackoverflow.com/users/17731482/rakeshid03">
-            <div><i class="fa-brands fa-stack-overflow"></i>Stackoverflow</div>
-          </a>
-          <a href="https://hashnode.com/@Rakeshid03">
-            <div><i class="fa-brands fa-hashnode"></i>Hashnode</div>
-          </a>
-          <a href="https://www.quora.com/profile/Rakeshid03">
-            <div><i class="fa-brands fa-quora"></i>Quora</div>
-          </a>
-          <a href="https://medium.com/@rakeshid03">
-            <div><i class="fa-brands fa-medium"></i>Medium</div>
-          </a>
-          <a href="https://dribbble.com/rakeshid03">
-            <div><i class="fa-brands fa-dribbble"></i>Dribbble</div>
-          </a>
-          <a href="https://www.reddit.com/user/rakeshid03/">
-            <div><i class="fa-brands fa-reddit"></i>Reddit</div>
-          </a>
-          <a href="https://www.tumblr.com/rakeshid03/">
-            <div><i class="fa-brands fa-tumblr"></i>Tumblr</div>
-          </a>
-          <a href="https://www.goodreads.com/rakeshid3">
-            <div><i class="fa-brands fa-goodreads"></i>Goodreads</div>
-          </a>
-          <a href="https://soundcloud.com/rakeshid03">
-            <div><i class="fa-brands fa-soundcloud"></i>Soundcloud</div>
-          </a>
+    /* Responsive */
+    @media (max-width:960px){.hero{grid-template-columns:1fr} .two-col{grid-template-columns:1fr} .grid{grid-template-columns:repeat(2,1fr)} }
+    @media (max-width:560px){.grid{grid-template-columns:1fr} .brand .logo{width:46px;height:46px}} 
+
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <div class="logo">BL</div>
+        <div>
+          <div style="font-weight:800">Brian Lai</div>
+          <div style="font-size:13px;color:var(--muted)">Robotics Software Engineer — Navigation · Perception · ROS</div>
         </div>
       </div>
-    </div>
-    <script src="assets/js/script.js"></script>
-  </body>
+      <nav>
+        <a href="#projects">Projects</a>
+        <a href="#resume">Resume</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <section class="hero card">
+      <div>
+        <h1>Robotics portfolio — navigation, perception & simulation</h1>
+        <p class="lead">I design, implement, and tune autonomous navigation stacks, perception pipelines, and simulation environments. Main tools: ROS / ROS2, Gazebo / Ignition (ros_gz), pointcloud processing, SLAM, path planning, and C++/Python system integration.</p>
+
+        <div class="ctas">
+          <a class="btn btn-primary" href="#projects">View projects</a>
+          <a class="btn btn-ghost" href="#resume">Download resume</a>
+        </div>
+
+        <div class="skills" aria-hidden>
+          <div class="chip">ROS / ROS2</div>
+          <div class="chip">SLAM (Cartographer, RTAB-Map)</div>
+          <div class="chip">Nav2 & planners</div>
+          <div class="chip">Pointcloud / PCL</div>
+          <div class="chip">Gazebo / Ignition</div>
+          <div class="chip">C++ / Python</div>
+          <div class="chip">Computer Vision</div>
+        </div>
+      </div>
+
+      <aside style="display:flex;flex-direction:column;gap:12px">
+        <div class="card">
+          <div style="font-weight:700">Quick stats</div>
+          <div style="display:flex;gap:12px;margin-top:8px">
+            <div style="flex:1;">10+ deployed robots<br><span class="meta">field & simulation</span></div>
+            <div style="flex:1;">100k+ km planned<br><span class="meta">cumulative tests</span></div>
+          </div>
+        </div>
+
+        <div class="card" style="text-align:center">
+          <div style="font-weight:700">Resume</div>
+          <div class="meta">Download a PDF copy or view full details below.</div>
+          <div style="margin-top:12px">
+            <a class="btn btn-primary" href="./resume.pdf" download>Download resume (PDF)</a>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section id="projects" style="margin-top:18px">
+      <h2 style="margin-bottom:12px">Selected projects</h2>
+      <p class="meta">A curated selection — click any project to open details (link to repo, demo, or paper).</p>
+      <div class="grid" style="margin-top:12px">
+
+        <article class="card" style="padding:14px">
+          <div class="proj-img">AMCL vs ICP vs NDT</div>
+          <h3 class="project-title">Localization comparison (AMCL / ICP / NDT)</h3>
+          <div class="meta">Analysis of RPE/RTE, trajectory plots, and error statistics. Tools: ROS, PCL, Python (matplotlib).</div>
+          <div style="margin-top:12px"><a href="#" aria-label="Open project">Open repo →</a></div>
+        </article>
+
+        <article class="card" style="padding:14px">
+          <div class="proj-img">Nav2 Tuning</div>
+          <h3 class="project-title">Nav2 planner tuning & custom controller</h3>
+          <div class="meta">Custom global/local planner plugins, smac_hybrid tuning, vector_pursuit controller development and benchmarks.</div>
+          <div style="margin-top:12px"><a href="#">Open repo →</a></div>
+        </article>
+
+        <article class="card" style="padding:14px">
+          <div class="proj-img">Simulation + URDF</div>
+          <h3 class="project-title">d2g2 robot — modular URDF & Gazebo (Ignition)</h3>
+          <div class="meta">Modular Xacro URDF with conditional sensors, Ignition Gazebo plugin conversion, and ros_gz bridges.</div>
+          <div style="margin-top:12px"><a href="#">Open repo →</a></div>
+        </article>
+
+        <article class="card" style="padding:14px">
+          <div class="proj-img">Pointcloud</div>
+          <h3 class="project-title">Pointcloud fusion & obstacle detection</h3>
+          <div class="meta">Livox & Velodyne data fusion, downsample & voxel-grid pipelines, ROI filtering & clustering.</div>
+          <div style="margin-top:12px"><a href="#">Open repo →</a></div>
+        </article>
+
+        <article class="card" style="padding:14px">
+          <div class="proj-img">6-DOF Arm</div>
+          <h3 class="project-title">6-DOF Arm URDF & control</h3>
+          <div class="meta">URDF with mimic gripper, joint limits, and ros2_control integration for position and effort controllers.</div>
+          <div style="margin-top:12px"><a href="#">Open repo →</a></div>
+        </article>
+
+        <article class="card" style="padding:14px">
+          <div class="proj-img">Smart Maint</div>
+          <h3 class="project-title">Smart Monitoring & Predictive Maintenance</h3>
+          <div class="meta">Data pipelines, anomaly detection, and dashboard for industrial equipment availability.</div>
+          <div style="margin-top:12px"><a href="#">Open repo →</a></div>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="resume" style="margin-top:22px">
+      <h2 style="margin-bottom:8px">Resume</h2>
+      <div class="two-col" style="margin-top:12px">
+        <div class="card resume-card">
+          <div style="font-weight:800">Experience</div>
+          <div style="color:var(--muted)">Robotics Software Engineer — Braintree Technologies (2021–Present)
+            <ul style="margin-top:8px;color:var(--muted)">
+              <li>Navigation systems design & implementation using ROS1/ROS2</li>
+              <li>SLAM, perception, pointcloud processing, controller tuning</li>
+              <li>Simulation pipelines and Gazebo / Ignition migration</li>
+            </ul>
+          </div>
+
+          <div style="font-weight:800;margin-top:6px">Education</div>
+          <div class="meta">B.Eng. / M.Eng. in Robotics / Controls (university name)</div>
+
+          <div style="margin-top:8px">
+            <a class="btn btn-primary download" href="./resume.pdf" download>Download resume (PDF)</a>
+            <a class="btn btn-ghost" style="margin-left:8px" href="#contact">Contact</a>
+          </div>
+        </div>
+
+        <aside class="card" style="padding:16px">
+          <div style="font-weight:700">Skills & Tools</div>
+          <div class="meta" style="margin-top:8px">
+            ROS / ROS2 · C++ · Python · PCL · OpenCV · Gazebo / Ignition · Nav2 · SLAM · Git · CI/CD
+          </div>
+
+          <div style="margin-top:12px">
+            <div style="font-weight:700">Links</div>
+            <div style="margin-top:8px;color:var(--muted)">
+              <div>GitHub: <a href="https://github.com/yourusername">github.com/yourusername</a></div>
+              <div>LinkedIn: <a href="https://linkedin.com/in/yourprofile">linkedin.com/in/yourprofile</a></div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="contact" style="margin-top:22px">
+      <h2 style="margin-bottom:8px">Contact</h2>
+      <div class="card" style="padding:18px;display:flex;flex-direction:column;gap:10px">
+        <div class="meta">Email: <a href="mailto:you@example.com">you@example.com</a></div>
+        <div class="meta">Location: Malaysia</div>
+        <form onsubmit="event.preventDefault(); alert('Thanks — copy your email: you@example.com or contact via GitHub!')" style="display:flex;gap:8px;flex-wrap:wrap">
+          <input type="text" placeholder="Your name" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;flex:1;min-width:160px" />
+          <input type="email" placeholder="Your email" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;min-width:200px" />
+          <button class="btn btn-primary" style="min-width:140px">Send</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <div class="meta">Made with ❤️ — clone, edit, and host this page on GitHub Pages (index.html + resume.pdf)</div>
+    </footer>
+  </div>
+</body>
 </html>

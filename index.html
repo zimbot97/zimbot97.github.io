@@ -1,11 +1,3 @@
-<!--
-  GitHub Pages single-file site (index.html)
-  Instructions:
-  1. Save this file as `index.html` at the root of your GitHub repository.
-  2. Add your resume file as `resume.pdf` in the same repo (or change the link below).
-  3. Commit and push to GitHub. Enable Pages from Settings -> Pages and select branch `main` (root) or `gh-pages` if you prefer.
-  4. Customize texts, project links, images, and icons as needed.
--->
 <!doctype html>
 <html lang="en">
 <head>
@@ -104,7 +96,7 @@
           <div style="font-weight:700">Resume</div>
           <div class="meta">Download a PDF copy or view full details below.</div>
           <div style="margin-top:12px">
-            <a class="btn btn-primary" href="./resume.pdf" download>Download resume (PDF)</a>
+            <a class="btn btn-primary" href="./resource/resume.pdf" download>Download resume (PDF)</a>
           </div>
         </div>
       </aside>
@@ -119,38 +111,37 @@
           <div class="proj-img">AMCL vs ICP vs NDT</div>
           <h3 class="project-title">Localization comparison (AMCL / ICP / NDT)</h3>
           <div class="meta">Analysis of RPE/RTE, trajectory plots, and error statistics. Tools: ROS, PCL, Python (matplotlib).</div>
-          <div style="margin-top:12px"><a href="#" aria-label="Open project">Open repo →</a></div>
-        </article>
-
-        <article class="card" style="padding:14px">
-          <div class="proj-img">Nav2 Tuning</div>
-          <h3 class="project-title">Nav2 planner tuning & custom controller</h3>
-          <div class="meta">Custom global/local planner plugins, smac_hybrid tuning, vector_pursuit controller development and benchmarks.</div>
-          <div style="margin-top:12px"><a href="#">Open repo →</a></div>
-        </article>
-
-
-        <article class="card" style="padding:14px">
-          <div class="proj-img">Pointcloud</div>
-          <h3 class="project-title">Pointcloud fusion & obstacle detection</h3>
-          <div class="meta">Livox & Velodyne data fusion, downsample & voxel-grid pipelines, ROI filtering & clustering.</div>
-          <div style="margin-top:12px"><a href="#">Open repo →</a></div>
+          <div style="margin-top:12px"><a href="https://github.com/zimbot97/ros2_ws" aria-label="Open project">Open repo →</a></div>
         </article>
 
         <article class="card" style="padding:14px">
           <div class="proj-img">6-DOF Arm</div>
           <h3 class="project-title">6-DOF Arm URDF & control</h3>
           <div class="meta">URDF with mimic gripper, joint limits, and ros2_control integration for position and effort controllers.</div>
-          <div style="margin-top:12px"><a href="#">Open repo →</a></div>
+          <div style="margin-top:12px"><a href="https://github.com/zimbot97/6dof_robotics_arm">Open repo →</a></div>
         </article>
 
+      </div>
+    </section>
+
+    <section id="industrial" style="margin-top:22px">
+      <h2 style="margin-bottom:8px">Industrial Experience</h2>
+      <div class="two-col" style="margin-top:12px">
         <article class="card" style="padding:14px">
-          <div class="proj-img">Smart Maint</div>
-          <h3 class="project-title">Smart Monitoring & Predictive Maintenance</h3>
-          <div class="meta">Data pipelines, anomaly detection, and dashboard for industrial equipment availability.</div>
-          <div style="margin-top:12px"><a href="#">Open repo →</a></div>
+          <div class="proj-img">Industrial Navigation</div>
+          <h3 class="project-title">Navigation stack design & deployment in agriculture</h3>
+          <div class="meta">
+            Developed and deployed the ROS2 navigation stack for agricultural robots in oil palm and chilli farm environments.  
+            Implemented pointcloud fusion (Livox & Velodyne) with voxel-grid filtering, ROI segmentation, and clustering for robust obstacle detection.  
+            Designed and tuned custom global/local planner plugins (Smac Hybrid, Vector Pursuit controller) and validated performance through real-world testing.
+          </div>
+          <ul style="margin-top:8px;color:var(--muted);padding-left:18px">
+            <li>Pointcloud processing (fusion, downsampling, clustering)</li>
+            <li>Image-based perception & filtering</li>
+            <li>Custom planner & controller plugins</li>
+            <li>Deployment & field testing in oil palm and chilli farms</li>
+          </ul>
         </article>
-
       </div>
     </section>
 
@@ -158,8 +149,11 @@
       <h2 style="margin-bottom:8px">Resume</h2>
       <div class="two-col" style="margin-top:12px">
         <div class="card resume-card">
+          
+          <!-- Experience -->
           <div style="font-weight:800">Experience</div>
-          <div style="color:var(--muted)">Robotics Software Engineer — Braintree Technologies (2021–Present)
+          <div style="color:var(--muted)">
+            Robotics Software Engineer — Braintree Technologies (2021–Present)
             <ul style="margin-top:8px;color:var(--muted)">
               <li>Navigation systems design & implementation using ROS1/ROS2</li>
               <li>SLAM, perception, pointcloud processing, controller tuning</li>
@@ -167,15 +161,35 @@
             </ul>
           </div>
 
-          <div style="font-weight:800;margin-top:6px">Education</div>
-          <div class="meta">B.Eng. / M.Eng. in Robotics / Controls (university name)</div>
+          <!-- Postgraduate Experience -->
+          <div style="font-weight:800;margin-top:12px">Postgraduate Experience</div>
+          <div style="color:var(--muted)">
+            MPhil Researcher, Universiti Teknologi Malaysia (2022–Present)
+            <ul style="margin-top:8px;color:var(--muted)">
+              <li>Conducting advanced research on localization techniques for mobile robotics</li>
+              <li>Enhanced scan-matching algorithms to improve positional accuracy and robustness</li>
+              <li>Built agricultural simulation environments to benchmark and compare localization methods</li>
+              <li>Performed literature reviews of state-of-the-art techniques to inform research direction</li>
+            </ul>
+          </div>
 
-          <div style="margin-top:8px">
-            <a class="btn btn-primary download" href="./resume.pdf" download>Download resume (PDF)</a>
+          <!-- Education -->
+          <div style="font-weight:800;margin-top:12px">Education</div>
+          <div class="meta">
+            Universiti Teknologi Malaysia (UTM) — Master of Philosophy (Robotics & Localization) (2022–Present)
+          </div>
+          <div class="meta" style="margin-top:4px">
+            Universiti Teknologi Malaysia (UTM) — Bachelor of Electronic Systems Engineering (2017–2021)
+          </div>
+
+          <!-- Resume download & contact -->
+          <div style="margin-top:12px">
+            <a class="btn btn-primary download" href="./resource/resume.pdf" download>Download resume (PDF)</a>
             <a class="btn btn-ghost" style="margin-left:8px" href="#contact">Contact</a>
           </div>
         </div>
 
+        <!-- Sidebar -->
         <aside class="card" style="padding:16px">
           <div style="font-weight:700">Skills & Tools</div>
           <div class="meta" style="margin-top:8px">
@@ -185,8 +199,8 @@
           <div style="margin-top:12px">
             <div style="font-weight:700">Links</div>
             <div style="margin-top:8px;color:var(--muted)">
-              <div>GitHub: <a href="https://github.com/yourusername">github.com/yourusername</a></div>
-              <div>LinkedIn: <a href="https://linkedin.com/in/yourprofile">linkedin.com/in/yourprofile</a></div>
+              <div>GitHub: <a href="https://github.com/zimbot97">github.com/zimbot97</a></div>
+              <div>LinkedIn: <a href="https://linkedin.com/in/brianlailaphong">linkedin.com/in/brianlailaphong</a></div>
             </div>
           </div>
         </aside>
@@ -196,19 +210,18 @@
     <section id="contact" style="margin-top:22px">
       <h2 style="margin-bottom:8px">Contact</h2>
       <div class="card" style="padding:18px;display:flex;flex-direction:column;gap:10px">
-        <div class="meta">Email: <a href="mailto:you@example.com">you@example.com</a></div>
+        <div class="meta">Email: <a href="mailto:brian_llh@hotmail.com">brian_llh@hotmail.com</a></div>
         <div class="meta">Location: Malaysia</div>
-        <form onsubmit="event.preventDefault(); alert('Thanks — copy your email: you@example.com or contact via GitHub!')" style="display:flex;gap:8px;flex-wrap:wrap">
-          <input type="text" placeholder="Your name" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;flex:1;min-width:160px" />
-          <input type="email" placeholder="Your email" style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit;min-width:200px" />
-          <button class="btn btn-primary" style="min-width:140px">Send</button>
-        </form>
+
+        <!-- Mailto button -->
+        <a class="btn btn-primary" 
+          href="mailto:brian_llh@hotmail.com?subject=Contact from Website&body=Hi Brian,">
+          Send Email
+        </a>
       </div>
     </section>
 
-    <footer>
-      <div class="meta">Made with ❤️ — clone, edit, and host this page on GitHub Pages (index.html + resume.pdf)</div>
-    </footer>
+    
   </div>
 </body>
 </html>

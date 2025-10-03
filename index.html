@@ -6,31 +6,60 @@
   <title>Robotics Portfolio — Brian Lai</title>
   <meta name="description" content="Robotics portfolio and resume — navigation, perception, simulation, and ROS projects." />
   <style>
-    :root{--bg:#0f1724;--card:#0b1220;--muted:#9aa4b2;--accent:#6ee7b7}
-    *{box-sizing:border-box}
-    html,body{height:100%;margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;color:#e6eef6;background:linear-gradient(180deg,#071428 0%, var(--bg) 100%)}
-    a{color:var(--accent);text-decoration:none}
+    :root {
+      --bg: #ffffff;
+      --card: #f8fafc;
+      --muted: #4b5563;
+      --accent: #0ea5a4;
+      --text: #111827;
+    }
+
+    [data-theme="dark"] {
+      --bg: #0f1724;
+      --card: #0b1220;
+      --muted: #9aa4b2;
+      --accent: #6ee7b7;
+      --text: #e6eef6;
+    }
+
+    * { box-sizing: border-box; }
+    html,body {
+      height:100%;
+      margin:0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color: var(--text);
+      background: linear-gradient(180deg,#f1f5f9 0%, var(--bg) 100%);
+      transition: background 0.3s, color 0.3s;
+    }
+    [data-theme="dark"] body {
+      background: linear-gradient(180deg,#071428 0%, var(--bg) 100%);
+    }
+
+    a { color: var(--accent); text-decoration:none; }
     .wrap{max-width:1100px;margin:32px auto;padding:24px}
     header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
     .brand{display:flex;gap:12px;align-items:center}
     .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#0ea5a4,#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:700;color:#042028}
     nav a{margin-left:18px;font-weight:600;font-size:14px;color:var(--muted)}
     .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;margin-bottom:28px}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.6);border:1px solid rgba(255,255,255,0.03)}
+    .card{background: var(--card);padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.2);border:1px solid rgba(0,0,0,0.05)}
     h1{margin:0;font-size:30px}
     p.lead{color:var(--muted);margin-top:10px;line-height:1.5}
     .ctas{margin-top:16px;display:flex;gap:12px}
     .btn{padding:10px 14px;border-radius:10px;font-weight:700;border:none;cursor:pointer}
-    .btn-primary{background:linear-gradient(90deg,var(--accent),#34d399);color:#042028}
-    .btn-ghost{background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04)}
+    .btn-primary{background:linear-gradient(90deg,var(--accent),#34d399);color:#fff}
+    .btn-ghost{background:transparent;color:var(--muted);border:1px solid rgba(0,0,0,0.1)}
+    [data-theme="dark"] .btn-ghost{border:1px solid rgba(255,255,255,0.04)}
     .skills{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .chip{background:rgba(255,255,255,0.02);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted);border:1px solid rgba(255,255,255,0.02)}
+    .chip{background:rgba(0,0,0,0.03);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted);border:1px solid rgba(0,0,0,0.05)}
+    [data-theme="dark"] .chip{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)}
 
     /* Projects grid */
     .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
     .project-title{font-size:16px;margin:0}
     .meta{color:var(--muted);font-size:13px;margin-top:8px}
-    .proj-img{height:130px;border-radius:8px;background:linear-gradient(135deg,#072033,#0b1320);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
+    .proj-img{height:130px;border-radius:8px;background:linear-gradient(135deg,#e2e8f0,#f1f5f9);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
+    [data-theme="dark"] .proj-img{background:linear-gradient(135deg,#072033,#0b1320)}
 
     /* Resume & contact */
     .two-col{display:grid;grid-template-columns:1fr 360px;gap:18px}
@@ -42,7 +71,6 @@
     /* Responsive */
     @media (max-width:960px){.hero{grid-template-columns:1fr} .two-col{grid-template-columns:1fr} .grid{grid-template-columns:repeat(2,1fr)} }
     @media (max-width:560px){.grid{grid-template-columns:1fr} .brand .logo{width:46px;height:46px}} 
-
   </style>
 </head>
 <body>
@@ -59,9 +87,12 @@
         <a href="#projects">Projects</a>
         <a href="#resume">Resume</a>
         <a href="#contact">Contact</a>
+        <!-- Theme toggle button -->
+        <button id="theme-toggle" class="btn btn-ghost" style="margin-left:12px">🌞 / 🌙</button>
       </nav>
     </header>
 
+    <!-- Hero -->
     <section class="hero card">
       <div>
         <h1>Robotics portfolio — navigation, perception & simulation</h1>
@@ -102,6 +133,7 @@
       </aside>
     </section>
 
+    <!-- Projects -->
     <section id="projects" style="margin-top:18px">
       <h2 style="margin-bottom:12px">Selected projects</h2>
       <p class="meta">A curated selection — click any project to open details (link to repo, demo, or paper).</p>
@@ -114,12 +146,6 @@
           <div style="margin-top:12px"><a href="https://github.com/zimbot97/ros2_ws" aria-label="Open project">Open repo →</a></div>
         </article>
 
-        <!-- <article class="card" style="padding:14px">
-          <div class="proj-img">6-DOF Arm</div>
-          <h3 class="project-title">6-DOF Arm URDF & control</h3>
-          <div class="meta">URDF with mimic gripper, joint limits, and ros2_control integration for position and effort controllers.</div>
-          <div style="margin-top:12px"><a href="https://github.com/zimbot97/6dof_robotics_arm">Open repo →</a></div>
-        </article> -->
         <article class="card" style="padding:14px">
           <div class="proj-img">6-DOF Arm</div>
           <h3 class="project-title">6-DOF Arm URDF & control</h3>
@@ -145,6 +171,7 @@
       </div>
     </section>
 
+    <!-- Industrial -->
     <section id="industrial" style="margin-top:22px">
       <h2 style="margin-bottom:8px">Industrial Experience</h2>
       <div class="two-col" style="margin-top:12px">
@@ -166,6 +193,7 @@
       </div>
     </section>
 
+    <!-- Resume -->
     <section id="resume" style="margin-top:22px">
       <h2 style="margin-bottom:8px">Resume</h2>
       <div class="two-col" style="margin-top:12px">
@@ -235,6 +263,7 @@
       </div>
     </section>
 
+    <!-- Contact -->
     <section id="contact" style="margin-top:22px">
       <h2 style="margin-bottom:8px">Contact</h2>
       <div class="card" style="padding:18px;display:flex;flex-direction:column;gap:10px">
@@ -249,7 +278,29 @@
       </div>
     </section>
 
-    
   </div>
+
+  <script>
+    const root = document.documentElement;
+    const toggleBtn = document.getElementById("theme-toggle");
+
+    // Load saved theme or system preference
+    const savedTheme = localStorage.getItem("theme");
+    if (savedTheme) {
+      root.setAttribute("data-theme", savedTheme);
+    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      root.setAttribute("data-theme", "dark");
+    }
+
+    toggleBtn.addEventListener("click", () => {
+      if (root.getAttribute("data-theme") === "dark") {
+        root.setAttribute("data-theme", "light");
+        localStorage.setItem("theme", "light");
+      } else {
+        root.setAttribute("data-theme", "dark");
+        localStorage.setItem("theme", "dark");
+      }
+    });
+  </script>
 </body>
 </html>

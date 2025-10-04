@@ -39,6 +39,46 @@
       background: #000000;
     }
 
+    /* Industrial section layout */
+    .industrial-container {
+      display: flex;
+      gap: 20px;
+    }
+
+    .industrial-left {
+      flex: 1;
+      padding-right: 16px;
+    }
+
+    .industrial-divider {
+      width: 1px;
+      background: #ccc;
+    }
+
+    .industrial-right {
+      flex: 1;
+    }
+
+    .industrial-right ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+/* Responsive: hide left + divider on small screens */
+@media (max-width: 768px) {
+  .industrial-container {
+    flex-direction: column;
+  }
+  .industrial-left,
+  .industrial-divider {
+    display: none;
+  }
+  .industrial-right {
+    width: 100%;
+  }
+}
+
     a { color: var(--accent); text-decoration:none; }
     .wrap{max-width:1100px;margin:32px auto;padding:24px}
     header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
@@ -137,6 +177,53 @@
       </aside>
     </section>
 
+    <!-- Industrial -->
+    <section id="industrial" style="margin-top:22px">
+      <h2 style="margin-bottom:8px">Industrial Experience</h2>
+      <div class="card" style="padding:18px; width:100%">
+
+        <div class="industrial-container">
+          <!-- Left (paragraph / detailed text) -->
+          <div class="industrial-left">
+            <h3 class="project-title">System Design & Deployment of ROS2 Navigation Stack</h3>
+            <p class="meta">
+              Designed and deployed a full ROS2 <b>Nav2-based navigation system</b> for agricultural robots 
+              in oil palm and chilli farm environments. Built a pointcloud fusion pipeline with the <b>PCL library</b>, 
+              integrating Livox Horizon and Velodyne LIDAR. Implemented voxel-grid downsampling, ROI segmentation, 
+              and Euclidean clustering for robust obstacle detection. <br><br>
+              Customized Nav2 <b>global/local planners</b>, optimized <b>Costmap2D layers</b>, 
+              and tuned local controllers for real-time dense terrain. 
+              Experienced in <b>ROS1 → ROS2 migration</b> of launch files, URDF/Xacro, plugins, 
+              and Gazebo simulation workflows. Validated through extensive <b>field testing</b>, 
+              ensuring navigation reliability across varied conditions.
+            </p>
+            <p class="meta" style="margin-top:8px">
+              <b>Tech Stack:</b> ROS1, ROS2, Nav2, C++, Python, PCL, Gazebo, RViz, Livox, Velodyne
+            </p>
+          </div>
+
+          <!-- Divider -->
+          <div class="industrial-divider"></div>
+
+          <!-- Right (point form) -->
+          <div class="industrial-right">
+            <ul>
+              <li>System-level navigation architecture & integration</li>
+              <li>Advanced costmap configuration & planner tuning in Nav2</li>
+              <li>Pointcloud fusion & 3D perception with PCL</li>
+              <li>Algorithm optimization for real-time robotics</li>
+              <li>ROS1 → ROS2 migration & compatibility</li>
+              <li>Extensive deployment & validation in agricultural environments</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
     <!-- Projects -->
     <section id="projects" style="margin-top:18px">
       <h2 style="margin-bottom:12px">Selected projects</h2>
@@ -145,9 +232,29 @@
 
         <article class="card" style="padding:14px">
           <div class="proj-img">AMCL vs ICP vs NDT</div>
-          <h3 class="project-title">Localization comparison (AMCL / ICP / NDT)</h3>
-          <div class="meta">Analysis of RPE/RTE, trajectory plots, and error statistics. Tools: ROS, PCL, Python (matplotlib).</div>
-          <div style="margin-top:12px"><a href="https://github.com/zimbot97/ros2_ws" aria-label="Open project">Open repo →</a></div>
+          <h3 class="project-title">Localization Comparison (AMCL / ICP / NDT)</h3>
+          <div class="meta">
+            Analysis of RPE/RTE, trajectory plots, and error statistics.  
+            Tools: ROS, PCL, Python (matplotlib).
+          </div>
+
+          <!-- GitHub Thumbnail -->
+          <div style="margin-top:12px">
+            <a href="https://github.com/zimbot97/ros2_ws" target="_blank">
+              <img src="./resource/proposed-high-res_1 11 Aug.png" 
+                  alt="AMCL vs ICP vs NDT project thumbnail" 
+                  style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px">
+            </a>
+          </div>
+
+          <!-- Links -->
+          <div style="margin-top:12px">
+            <a href="https://github.com/zimbot97/ros2_ws" aria-label="Open project">Open repo →</a> &nbsp;|&nbsp; 
+            <a href="https://thesai.org/Publications/ViewPaper?Volume=16&Issue=3&Code=ijacsa&SerialNo=100" aria-label="Read paper">
+              <img src="./resource/sai.png" alt="Paper Logo" style="height:50px; vertical-align:middle; margin-right:6px;">
+              Read paper →
+            </a>
+          </div>
         </article>
 
         <article class="card" style="padding:14px">
@@ -162,7 +269,7 @@
             <a href="https://www.youtube.com/watch?v=IXoSNhc9wtE" target="_blank">
               <img src="https://img.youtube.com/vi/IXoSNhc9wtE/0.jpg" 
                   alt="6-DOF Arm demo video" 
-                  style="width:100%;border-radius:8px">
+                  style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px">
             </a>
           </div>
 
@@ -172,30 +279,11 @@
           </div>
         </article>
 
+
       </div>
     </section>
 
-    <!-- Industrial -->
-    <section id="industrial" style="margin-top:22px">
-      <h2 style="margin-bottom:8px">Industrial Experience</h2>
-      <div class="two-col" style="margin-top:12px">
-        <article class="card" style="padding:14px">
-          <div class="proj-img">Industrial Navigation</div>
-          <h3 class="project-title">Navigation stack design & deployment in agriculture</h3>
-          <div class="meta">
-            Developed and deployed the ROS2 navigation stack for agricultural robots in oil palm and chilli farm environments.  
-            Implemented pointcloud fusion (Livox & Velodyne) with voxel-grid filtering, ROI segmentation, and clustering for robust obstacle detection.  
-            Designed and tuned custom global/local planner plugins and validated performance through real-world testing.
-          </div>
-          <ul style="margin-top:8px;color:var(--muted);padding-left:18px">
-            <li>Pointcloud processing (fusion, downsampling, clustering)</li>
-            <li>Image-based perception & filtering</li>
-            <li>Custom planner & controller plugins</li>
-            <li>Deployment & field testing in oil palm and chilli farms</li>
-          </ul>
-        </article>
-      </div>
-    </section>
+    
 
     <!-- Resume -->
     <section id="resume" style="margin-top:22px">

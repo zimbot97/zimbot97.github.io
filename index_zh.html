@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Robotics Portfolio — Brian Lai</title>
-  <meta name="description" content="Robotics portfolio and resume — navigation, perception, simulation, and ROS projects." />
+  <title>机器人作品集 — Brian Lai</title>
+  <meta name="description" content="机器人作品集与简历 — 导航、感知、仿真及 ROS 项目。" />
   <style>
     :root {
       --bg: #ffffff;
@@ -22,19 +22,15 @@
       --text: #e6eef6;
     }
 
-    
+
     * { box-sizing: border-box; }
     html,body {
       height:100%;
       margin:0;
       font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
       color: var(--text);
-      /* background: linear-gradient(180deg,#f1f5f9 0%, var(--bg) 100%); */
       transition: background 0.3s, color 0.3s;
     }
-    /* [data-theme="dark"] body {
-      background: linear-gradient(180deg,#071428 0%, var(--bg) 100%);
-    } */
      [data-theme="dark"] body {
       background: #000000;
     }
@@ -65,7 +61,6 @@
       color: var(--muted);
     }
 
-/* Responsive: hide left + divider on small screens */
 @media (max-width: 768px) {
   .industrial-container {
     flex-direction: column;
@@ -133,14 +128,14 @@
         <div class="logo">BL</div>
         <div>
           <div style="font-weight:800">Brian Lai</div>
-          <div style="font-size:13px;color:var(--muted)">Robotics Software Engineer — Navigation · Perception · ROS</div>
+          <div style="font-size:13px;color:var(--muted)">机器人软件工程师 — 导航 · 感知 · ROS</div>
         </div>
       </div>
       <nav>
-        <a href="#projects">Projects</a>
-        <a href="#resume">Resume</a>
-        <a href="#contact">Contact</a>
-        <a href="./index_zh.html" style="margin-left:18px;font-weight:600;font-size:14px">中文</a>
+        <a href="#projects">项目</a>
+        <a href="#resume">简历</a>
+        <a href="#contact">联系</a>
+        <a href="./index.html" style="margin-left:18px;font-weight:600;font-size:14px">English</a>
         <button id="theme-toggle" class="btn btn-ghost" style="margin-left:12px">🌞 / 🌙</button>
       </nav>
     </header>
@@ -148,56 +143,51 @@
     <!-- Hero -->
     <section class="hero card">
       <div>
-        <h1>Robotics portfolio — navigation, perception & simulation</h1>
-        <p class="lead">I design, implement, and tune autonomous navigation stacks, perception pipelines, and simulation environments. Main tools: ROS / ROS2, Gazebo / Ignition (ros_gz), pointcloud processing, SLAM, path planning, and C++/Python system integration.</p>
+        <h1>机器人作品集 — 导航、感知与仿真</h1>
+        <p class="lead">专注于设计、实现与调优自主导航栈、感知流水线及仿真环境。主要工具：ROS / ROS2、Gazebo / Ignition (ros_gz)、点云处理、SLAM、路径规划，以及 C++/Python 系统集成。</p>
 
-        <!-- <div class="ctas">
-          <a class="btn btn-primary" href="#projects">View projects</a>
-          <a class="btn btn-ghost" href="#resume">Download resume</a>
-        </div> -->
         <a class="btn btn-primary" href="./resource/resume.pdf" download>
-          Download Resume (EN)
+          下载英文简历 (EN)
         </a>
 
-        <a class="btn btn-ghost" 
-          href="./resource/resume_cn.pdf" 
-          download 
+        <a class="btn btn-ghost"
+          href="./resource/resume_cn.pdf"
+          download
           style="margin-top:8px">
           下载中文简历 (CN)
         </a>
 
         <div class="skills" aria-hidden>
           <div class="chip">ROS / ROS2</div>
-          <div class="chip">SLAM (Cartographer, RTAB-Map)</div>
-          <div class="chip">Nav2 & planners</div>
-          <div class="chip">Pointcloud / PCL</div>
+          <div class="chip">SLAM（Cartographer、RTAB-Map）</div>
+          <div class="chip">Nav2 与路径规划</div>
+          <div class="chip">点云 / PCL</div>
           <div class="chip">Gazebo / Ignition</div>
           <div class="chip">C++ / Python</div>
-          <div class="chip">Computer Vision</div>
+          <div class="chip">计算机视觉</div>
         </div>
       </div>
 
       <aside style="display:flex;flex-direction:column;gap:12px">
         <div class="card">
-          <div style="font-weight:700">Quick stats</div>
+          <div style="font-weight:700">快速统计</div>
           <div style="display:flex;gap:12px;margin-top:8px">
-            <div style="flex:1;">10+ deployed robots<br><span class="meta">field & simulation</span></div>
-            <div style="flex:1;">100k+ km planned<br><span class="meta">cumulative tests</span></div>
+            <div style="flex:1;">10+ 台部署机器人<br><span class="meta">实地与仿真</span></div>
+            <div style="flex:1;">100k+ 公里规划<br><span class="meta">累计测试</span></div>
           </div>
         </div>
 
         <div class="card" style="text-align:center">
-          <div style="font-weight:700">Resume</div>
-          <div class="meta">Download a PDF copy or view full details below.</div>
+          <div style="font-weight:700">简历下载</div>
+          <div class="meta">下载 PDF 版本或查看以下详细内容。</div>
           <div style="margin-top:12px">
-            <!-- <a class="btn btn-primary" href="./resource/resume.pdf" download>Download resume (PDF)</a> -->
           <a class="btn btn-primary" href="./resource/resume.pdf" download>
-            EN
+            英文 (EN)
           </a>
 
-          <a class="btn btn-ghost" 
-            href="./resource/resume_cn.pdf" 
-            download 
+          <a class="btn btn-ghost"
+            href="./resource/resume_cn.pdf"
+            download
             style="margin-top:8px">
             中文 (CN)
           </a>
@@ -208,158 +198,141 @@
 
     <!-- Industrial -->
     <section id="industrial" style="margin-top:22px">
-      <h2 style="margin-bottom:8px">Industrial Experience</h2>
+      <h2 style="margin-bottom:8px">工业经验</h2>
       <div class="card" style="padding:18px; width:100%">
 
         <div class="industrial-container">
-          <!-- Left (paragraph / detailed text) -->
+          <!-- Left -->
           <div class="industrial-left">
-            <h3 class="project-title">System Design & Deployment of ROS2 Navigation Stack</h3>
+            <h3 class="project-title">ROS2 导航栈系统设计与部署</h3>
             <p class="meta">
-              Designed and deployed a full ROS2 <b>Nav2-based navigation system</b> for agricultural robots 
-              in oil palm and chilli farm environments. Built a pointcloud fusion pipeline with the <b>PCL library</b>, 
-              integrating Livox Horizon and Velodyne LIDAR. Implemented voxel-grid downsampling, ROI segmentation, 
-              and Euclidean clustering for robust obstacle detection. <br><br>
-              Customized Nav2 <b>global/local planners</b>, optimized <b>Costmap2D layers</b>, 
-              and tuned local controllers for real-time dense terrain. 
-              Experienced in <b>ROS1 → ROS2 migration</b> of launch files, URDF/Xacro, plugins, 
-              and Gazebo simulation workflows. Validated through extensive <b>field testing</b>, 
-              ensuring navigation reliability across varied conditions.
+              为农业机器人（油棕与辣椒种植环境）设计并部署完整的 ROS2 <b>Nav2 导航系统</b>。
+              使用 <b>PCL 库</b>构建点云融合流水线，集成 Livox Horizon 与 Velodyne 激光雷达。
+              实现体素网格降采样、ROI 分割及欧氏距离聚类，实现鲁棒障碍物检测。<br><br>
+              自定义 Nav2 <b>全局/局部规划器</b>，优化 <b>Costmap2D 层</b>，
+              针对实时密集地形调优局部控制器。
+              具备 <b>ROS1 → ROS2 迁移</b>经验，涵盖 launch 文件、URDF/Xacro、插件及 Gazebo 仿真工作流。
+              通过大量<b>实地测试</b>验证系统，确保在多变环境下的导航可靠性。
             </p>
             <p class="meta" style="margin-top:8px">
-              <b>Tech Stack:</b> ROS1, ROS2, Nav2, C++, Python, PCL, Gazebo, RViz, Livox, Velodyne
+              <b>技术栈：</b>ROS1、ROS2、Nav2、C++、Python、PCL、Gazebo、RViz、Livox、Velodyne
             </p>
           </div>
 
           <!-- Divider -->
           <div class="industrial-divider"></div>
 
-          <!-- Right (point form) -->
+          <!-- Right -->
           <div class="industrial-right">
             <ul>
-              <li>System-level navigation architecture & integration</li>
-              <li>Advanced costmap configuration & planner tuning in Nav2</li>
-              <li>Pointcloud fusion & 3D perception with PCL</li>
-              <li>Algorithm optimization for real-time robotics</li>
-              <li>ROS1 → ROS2 migration & compatibility</li>
-              <li>Extensive deployment & validation in agricultural environments</li>
+              <li>系统级导航架构设计与集成</li>
+              <li>Nav2 高级代价地图配置与规划器调优</li>
+              <li>基于 PCL 的点云融合与三维感知</li>
+              <li>实时机器人算法优化</li>
+              <li>ROS1 → ROS2 迁移与兼容性</li>
+              <li>农业环境下的大规模部署与验证</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
 
-
-
-
-
     <!-- Projects -->
     <section id="projects" style="margin-top:18px">
-      <h2 style="margin-bottom:12px">Selected projects</h2>
-      <p class="meta">A curated selection — click any project to open details (link to repo, demo, or paper).</p>
+      <h2 style="margin-bottom:12px">精选项目</h2>
+      <p class="meta">精选作品展示 — 点击任意项目可查看详情（代码仓库、演示或论文）。</p>
       <div class="grid" style="margin-top:12px">
 
         <article class="card" style="padding:14px">
-          <div class="proj-img">BLDC FOC Motor Controller</div>
-          <h3 class="project-title">BLDC Motor FOC Controller</h3>
+          <div class="proj-img">BLDC FOC 电机控制器</div>
+          <h3 class="project-title">BLDC 无刷电机 FOC 控制器</h3>
 
           <div class="meta">
-            Designed a closed-loop <b>Field-Oriented Control (FOC)</b> velocity controller
-            for a 2804 BLDC motor using an <b>ESP32</b>, <b>DRV8313</b> three-phase driver,
-            and <b>MT6701</b> magnetic encoder in ABZ mode.
-            Includes a <b>Python GUI</b> with a real-time velocity slider and serial Commander
-            for live PID tuning.
+            使用 <b>ESP32</b>、<b>DRV8313</b> 三相驱动板及 ABZ 模式的 <b>MT6701</b> 磁性编码器，
+            为 2804 无刷电机设计了闭环<b>磁场定向控制（FOC）</b>速度控制器。
+            包含带实时速度滑块的 <b>Python 图形界面</b>及串口 Commander，支持在线 PID 调参。
             <br><br>
-            <b>Tech:</b> ESP32 · SimpleFOC · PlatformIO · C++ · Python · FOC · BLDC · PID Control
+            <b>技术：</b>ESP32 · SimpleFOC · PlatformIO · C++ · Python · FOC · BLDC · PID 控制
           </div>
 
           <div style="margin-top:12px">
             <img
               src="./resource/bldc_motor_ui.png"
-              alt="BLDC Motor Controller Python UI"
+              alt="BLDC 电机控制器 Python 界面"
               style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px"
             >
           </div>
 
           <div style="margin-top:12px">
             <a href="https://github.com/zimbot97/bldc_motor_test" target="_blank">
-              Open repo →
+              查看仓库 →
             </a>
           </div>
         </article>
 
         <article class="card" style="padding:14px">
           <div class="proj-img">AMCL vs ICP vs NDT</div>
-          <h3 class="project-title">Localization Comparison (AMCL / ICP / NDT)</h3>
+          <h3 class="project-title">定位算法对比（AMCL / ICP / NDT）</h3>
           <div class="meta">
-            Analysis of RPE/RTE, trajectory plots, and error statistics.  
-            Tools: ROS, PCL, Python (matplotlib).
+            分析 RPE/RTE、轨迹图及误差统计。
+            工具：ROS、PCL、Python（matplotlib）。
           </div>
 
-          <!-- GitHub Thumbnail -->
           <div style="margin-top:12px">
             <a href="https://github.com/zimbot97/ros2_ws" target="_blank">
-              <img src="./resource/proposed-high-res_1 11 Aug.png" 
-                  alt="AMCL vs ICP vs NDT project thumbnail" 
+              <img src="./resource/proposed-high-res_1 11 Aug.png"
+                  alt="AMCL vs ICP vs NDT 项目缩略图"
                   style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px">
             </a>
           </div>
 
-          <!-- Links -->
           <div style="margin-top:12px">
-            <a href="https://github.com/zimbot97/ros2_ws" aria-label="Open project">Open repo →</a> &nbsp;|&nbsp; 
-            <a href="https://thesai.org/Publications/ViewPaper?Volume=16&Issue=3&Code=ijacsa&SerialNo=100" aria-label="Read paper">
-              <img src="./resource/sai.png" alt="Paper Logo" style="height:50px; vertical-align:middle; margin-right:6px;">
-              Read paper →
+            <a href="https://github.com/zimbot97/ros2_ws" aria-label="查看项目">查看仓库 →</a> &nbsp;|&nbsp;
+            <a href="https://thesai.org/Publications/ViewPaper?Volume=16&Issue=3&Code=ijacsa&SerialNo=100" aria-label="阅读论文">
+              <img src="./resource/sai.png" alt="论文标志" style="height:50px; vertical-align:middle; margin-right:6px;">
+              阅读论文 →
             </a>
           </div>
         </article>
 
         <article class="card" style="padding:14px">
-          <div class="proj-img">6-DOF Arm</div>
-          <h3 class="project-title">6-DOF Arm URDF & control</h3>
+          <div class="proj-img">6 自由度机械臂</div>
+          <h3 class="project-title">6 自由度机械臂 URDF 与控制</h3>
           <div class="meta">
-            URDF with mimic gripper, joint limits, and ros2_control integration for position and effort controllers.
+            带夹爪 mimic 关节、关节限位及 ros2_control 集成，支持位置与力矩控制器。
           </div>
 
-          <!-- YouTube Thumbnail -->
           <div style="margin-top:12px">
             <a href="https://www.youtube.com/watch?v=IXoSNhc9wtE" target="_blank">
-              <img src="https://img.youtube.com/vi/IXoSNhc9wtE/0.jpg" 
-                  alt="6-DOF Arm demo video" 
+              <img src="https://img.youtube.com/vi/IXoSNhc9wtE/0.jpg"
+                  alt="6 自由度机械臂演示视频"
                   style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px">
             </a>
           </div>
 
-          <!-- GitHub Link -->
           <div style="margin-top:12px">
-            <a href="https://github.com/zimbot97/6dof_robotics_arm">Open repo →</a>
+            <a href="https://github.com/zimbot97/6dof_robotics_arm">查看仓库 →</a>
           </div>
         </article>
 
         <article class="card" style="padding:14px">
-          <div class="proj-img">Self-Balancing Robot</div>
-          <h3 class="project-title">Self-Balancing Two-Wheel Robot</h3>
+          <div class="proj-img">自平衡机器人</div>
+          <h3 class="project-title">两轮自平衡机器人</h3>
 
           <div class="meta">
-            Designed and implemented a two-wheel self-balancing robot using 
-            <b>PID control</b> and real-time <b>IMU sensor fusion</b>.
-            Achieved stable balancing through continuous feedback control 
-            on embedded hardware.
+            使用 <b>PID 控制</b>和实时 <b>IMU 传感器融合</b>设计并实现两轮自平衡机器人。
+            通过嵌入式硬件上的持续反馈控制实现稳定平衡。
             <br><br>
-            <b>Tech:</b> Arduino / Embedded C · PID Control · IMU · Control Systems
+            <b>技术：</b>Arduino / 嵌入式 C · PID 控制 · IMU · 控制系统
           </div>
 
-          <!-- YouTube Thumbnail with Play Button -->
           <div style="margin-top:12px; position:relative;">
             <a href="https://www.youtube.com/watch?v=rlDmU0SHkQA" target="_blank">
-              <img 
+              <img
                 src="https://img.youtube.com/vi/rlDmU0SHkQA/maxresdefault.jpg"
-                alt="Self-balancing robot demo"
+                alt="自平衡机器人演示"
                 style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px"
               >
-              
-              <!-- Play button overlay -->
               <div style="
                 position:absolute;
                 top:50%; left:50%;
@@ -378,85 +351,80 @@
             </a>
           </div>
 
-          <!-- Links -->
           <div style="margin-top:12px">
             <a href="https://github.com/zimbot97/Self-balancing-two-wheels-robot" target="_blank">
-              Open repo →
+              查看仓库 →
             </a>
             &nbsp;|&nbsp;
             <a href="https://www.youtube.com/watch?v=rlDmU0SHkQA" target="_blank">
-              Watch video →
+              观看视频 →
             </a>
           </div>
         </article>
 
-
       </div>
     </section>
 
-    
-
     <!-- Resume -->
     <section id="resume" style="margin-top:22px">
-      <h2 style="margin-bottom:8px">Resume</h2>
+      <h2 style="margin-bottom:8px">简历</h2>
       <div class="two-col" style="margin-top:12px">
         <div class="card resume-card">
-          
+
           <!-- Experience -->
-          <div style="font-weight:800">Experience</div>
+          <div style="font-weight:800">工作经验</div>
           <div style="color:var(--muted)">
-            Robotics Software Engineer — Braintree Technologies (2021–Present)
+            机器人软件工程师 — Braintree Technologies（2021 年至今）
             <ul style="margin-top:8px;color:var(--muted)">
-              <li>Designed and implemented navigation systems using ROS1/ROS2 and C++ for autonomous robotics.</li>
-              <li>Applied machine learning techniques to enhance autonomy and decision-making performance.</li>
-              <li>Developed simulation workflows in Gazebo and validated systems through field testing.</li>
-              <li>Processed and analyzed sensor data—including images, point clouds, and IMU inputs—for real-time localization and perception.</li>
-              <li>Designed and implemented custom ROS plugins to extend system functionality and optimize robot performance.</li>
-              <li>Integrated MoveIt for robotic arm motion planning and manipulation tasks.</li>
-              <li>Implemented object detection and perception pipelines to enable environment-aware interactions.</li>
-              <li>Set up and configured robotics Linux systems, including device drivers, networking, and deployment environments.</li>
-              <li>Integrated hardware such as RealSense, Jetson, Arduino, and Teensy to support prototyping and deployment.</li>
-              <li>Coordinated with clients, vendors, and multidisciplinary teams to deliver robust robotic solutions.</li>
+              <li>使用 ROS1/ROS2 和 C++ 为自主机器人设计并实现导航系统。</li>
+              <li>应用机器学习技术提升自主性与决策性能。</li>
+              <li>在 Gazebo 中开发仿真工作流，并通过实地测试验证系统。</li>
+              <li>处理和分析传感器数据（包括图像、点云和 IMU 输入），用于实时定位与感知。</li>
+              <li>设计并实现自定义 ROS 插件，扩展系统功能并优化机器人性能。</li>
+              <li>集成 MoveIt 用于机械臂运动规划与操作任务。</li>
+              <li>实现目标检测与感知流水线，支持环境感知交互。</li>
+              <li>搭建和配置机器人 Linux 系统，包括设备驱动、网络及部署环境。</li>
+              <li>集成 RealSense、Jetson、Arduino 和 Teensy 等硬件，支持原型开发与部署。</li>
+              <li>与客户、供应商及跨学科团队协调，交付可靠的机器人解决方案。</li>
             </ul>
           </div>
 
           <!-- Postgraduate Experience -->
-          <div style="font-weight:800;margin-top:12px">Postgraduate Experience</div>
+          <div style="font-weight:800;margin-top:12px">研究生经历</div>
           <div style="color:var(--muted)">
-            MPhil Researcher, Universiti Teknologi Malaysia (2022–Present)
+            哲学硕士研究员，马来西亚理工大学（2022 年至今）
             <ul style="margin-top:8px;color:var(--muted)">
-              <li>Conducting advanced research on localization techniques for mobile robotics</li>
-              <li>Enhanced scan-matching algorithms to improve positional accuracy and robustness</li>
-              <li>Built agricultural simulation environments to benchmark and compare localization methods</li>
-              <li>Performed literature reviews of state-of-the-art techniques to inform research direction</li>
+              <li>开展移动机器人定位技术的前沿研究</li>
+              <li>改进扫描匹配算法，提升定位精度与鲁棒性</li>
+              <li>构建农业仿真环境，对定位方法进行基准测试与对比</li>
+              <li>开展前沿技术文献综述，为研究方向提供依据</li>
             </ul>
           </div>
 
           <!-- Education -->
-          <div style="font-weight:800;margin-top:12px">Education</div>
+          <div style="font-weight:800;margin-top:12px">学历</div>
           <div class="meta">
-            Universiti Teknologi Malaysia (UTM) — Master of Philosophy (Robotics & Localization) (2022–Present)
+            马来西亚理工大学（UTM）— 哲学硕士（机器人与定位）（2022 年至今）
           </div>
           <div class="meta" style="margin-top:4px">
-            Universiti Teknologi Malaysia (UTM) — Bachelor of Electronic Systems Engineering (2017–2021)
+            马来西亚理工大学（UTM）— 电子系统工程学士（2017–2021）
           </div>
 
-          <!-- Resume download & contact -->
           <div style="margin-top:12px">
-            <a class="btn btn-primary download" href="./resource/resume.pdf" download>Download resume (PDF)</a>
-            <a class="btn btn-ghost" style="margin-left:8px" href="#contact">Contact</a>
+            <a class="btn btn-primary download" href="./resource/resume.pdf" download>下载简历（PDF）</a>
+            <a class="btn btn-ghost" style="margin-left:8px" href="#contact">联系我</a>
           </div>
         </div>
 
         <!-- Sidebar -->
         <aside class="card" style="padding:16px">
-          <div style="font-weight:700">Skills & Tools</div>
+          <div style="font-weight:700">技能与工具</div>
           <div class="meta" style="margin-top:8px">
             ROS / ROS2 · C++ · Python · PCL · OpenCV · Gazebo / Ignition · Nav2 · SLAM · Git · CI/CD
           </div>
 
           <div style="margin-top:12px">
-            <div style="font-weight:700">Links</div>
+            <div style="font-weight:700">链接</div>
             <div style="margin-top:8px;color:var(--muted)">
               <div>GitHub: <a href="https://github.com/zimbot97">github.com/zimbot97</a></div>
               <div>LinkedIn: <a href="https://linkedin.com/in/brianlailaphong">linkedin.com/in/brianlailaphong</a></div>
@@ -468,15 +436,14 @@
 
     <!-- Contact -->
     <section id="contact" style="margin-top:22px">
-      <h2 style="margin-bottom:8px">Contact</h2>
+      <h2 style="margin-bottom:8px">联系我</h2>
       <div class="card" style="padding:18px;display:flex;flex-direction:column;gap:10px">
-        <div class="meta">Email: <a href="mailto:brian_llh@hotmail.com">brian_llh@hotmail.com</a></div>
-        <div class="meta">Location: Malaysia</div>
+        <div class="meta">邮箱：<a href="mailto:brian_llh@hotmail.com">brian_llh@hotmail.com</a></div>
+        <div class="meta">所在地：马来西亚</div>
 
-        <!-- Mailto button -->
-        <a class="btn btn-primary" 
+        <a class="btn btn-primary"
           href="mailto:brian_llh@hotmail.com?subject=Contact from Website&body=Hi Brian,">
-          Send Email
+          发送邮件
         </a>
       </div>
     </section>
@@ -487,7 +454,6 @@
     const root = document.documentElement;
     const toggleBtn = document.getElementById("theme-toggle");
 
-    // Load saved theme or system preference
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme) {
       root.setAttribute("data-theme", savedTheme);

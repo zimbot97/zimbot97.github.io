@@ -3,517 +3,467 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Robotics Portfolio — Brian Lai</title>
-  <meta name="description" content="Robotics portfolio and resume — navigation, perception, simulation, and ROS projects." />
-  <style>
-    :root {
-      --bg: #ffffff;
-      --card: #f8fafc;
-      --muted: #4b5563;
-      --accent: #0ea5a4;
-      --text: #111827;
-    }
+  <title>Brian Lai — Robotics Software Engineer</title>
+  <meta name="description" content="Robotics portfolio of Brian Lai — autonomous navigation, perception, SLAM, and ROS/ROS2 systems for field robots." />
+  <meta property="og:title" content="Brian Lai — Robotics Software Engineer" />
+  <meta property="og:description" content="Autonomous navigation, perception, SLAM, and ROS/ROS2 systems for field robots." />
+  <meta property="og:type" content="website" />
 
-    [data-theme="dark"] {
-      --bg: #0f1724;
-      --card: #0b1220;
-      --muted: #9aa4b2;
-      --accent: #6ee7b7;
-      --text: #e6eef6;
-    }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/style.css" />
 
-    
-    * { box-sizing: border-box; }
-    html,body {
-      height:100%;
-      margin:0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color: var(--text);
-      /* background: linear-gradient(180deg,#f1f5f9 0%, var(--bg) 100%); */
-      transition: background 0.3s, color 0.3s;
+  <!-- Gaussian splat viewer (lazy-loaded on demand by assets/main.js) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "@mkkellogg/gaussian-splats-3d": "https://unpkg.com/@mkkellogg/gaussian-splats-3d@0.4/build/gaussian-splats-3d.module.js"
     }
-    /* [data-theme="dark"] body {
-      background: linear-gradient(180deg,#071428 0%, var(--bg) 100%);
-    } */
-     [data-theme="dark"] body {
-      background: #000000;
-    }
-
-    /* Industrial section layout */
-    .industrial-container {
-      display: flex;
-      gap: 20px;
-    }
-
-    .industrial-left {
-      flex: 1;
-      padding-right: 16px;
-    }
-
-    .industrial-divider {
-      width: 1px;
-      background: #ccc;
-    }
-
-    .industrial-right {
-      flex: 1;
-    }
-
-    .industrial-right ul {
-      margin: 0;
-      padding-left: 20px;
-      color: var(--muted);
-    }
-
-/* Responsive: hide left + divider on small screens */
-@media (max-width: 768px) {
-  .industrial-container {
-    flex-direction: column;
   }
-  .industrial-left,
-  .industrial-divider {
-    display: none;
-  }
-  .industrial-right {
-    width: 100%;
-  }
-}
-
-    a { color: var(--accent); text-decoration:none; }
-    .wrap{max-width:1100px;margin:32px auto;padding:24px}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#0ea5a4,#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:700;color:#042028}
-    nav a{margin-left:18px;font-weight:600;font-size:14px;color:var(--muted)}
-    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;margin-bottom:28px}
-    .card{background: var(--card);padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.2);border:1px solid rgba(0,0,0,0.05)}
-    h1{margin:0;font-size:30px}
-    p.lead{color:var(--muted);margin-top:10px;line-height:1.5}
-    .ctas{margin-top:16px;display:flex;gap:12px}
-    .btn{padding:10px 14px;border-radius:10px;font-weight:700;border:none;cursor:pointer}
-    .btn-primary{background:linear-gradient(90deg,var(--accent),#34d399);color:#fff}
-    .btn-ghost{background:transparent;color:var(--muted);border:1px solid rgba(0,0,0,0.1)}
-    [data-theme="dark"] .btn-ghost{border:1px solid rgba(255,255,255,0.04)}
-    .skills{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .chip{background:rgba(0,0,0,0.03);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted);border:1px solid rgba(0,0,0,0.05)}
-    [data-theme="dark"] .chip{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)}
-
-    /* Projects grid */
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .project-title{font-size:16px;margin:0}
-    .meta{color:var(--muted);font-size:13px;margin-top:8px}
-    .proj-img{height:130px;border-radius:8px;background:linear-gradient(135deg,#e2e8f0,#f1f5f9);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
-    [data-theme="dark"] .proj-img{background:linear-gradient(135deg,#072033,#0b1320)}
-
-    /* Resume & contact */
-    .two-col{display:grid;grid-template-columns:1fr 360px;gap:18px}
-    .resume-card{display:flex;flex-direction:column;gap:12px}
-    .download{display:inline-flex;align-items:center;gap:8px}
-
-    footer{margin-top:36px;color:var(--muted);font-size:13px;text-align:center}
-
-    /* Responsive */
-    @media (max-width:960px){.hero{grid-template-columns:1fr} .two-col{grid-template-columns:1fr} .grid{grid-template-columns:repeat(2,1fr)} }
-    @media (max-width:560px){.grid{grid-template-columns:1fr} .brand .logo{width:46px;height:46px}}
-
-    /* Mobile nav */
-    @media (max-width:640px){
-      .wrap{padding:16px}
-      header{flex-wrap:wrap;gap:10px}
-      nav{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
-      nav a{margin-left:10px;font-size:13px}
-      h1{font-size:22px}
-    }
-  </style>
+  </script>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
+
+  <!-- ================= Navigation ================= -->
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">
         <div class="logo">BL</div>
         <div>
-          <div style="font-weight:800">Brian Lai</div>
-          <div style="font-size:13px;color:var(--muted)">Robotics Software Engineer — Navigation · Perception · ROS</div>
+          <div class="brand-name">BRIAN LAI</div>
+          <div class="brand-role">Robotics Software Engineer</div>
         </div>
-      </div>
-      <nav>
+      </a>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
+        <a href="#showcase">3D Scan</a>
         <a href="#resume">Resume</a>
         <a href="#contact">Contact</a>
-        <a href="./index_zh.html" style="margin-left:18px;font-weight:600;font-size:14px">中文</a>
-        <button id="theme-toggle" class="btn btn-ghost" style="margin-left:12px">🌞 / 🌙</button>
-      </nav>
-    </header>
-
-    <!-- Hero -->
-    <section class="hero card">
-      <div>
-        <h1>Robotics portfolio — navigation, perception & simulation</h1>
-        <p class="lead">I design, implement, and tune autonomous navigation stacks, perception pipelines, and simulation environments. Main tools: ROS / ROS2, Gazebo / Ignition (ros_gz), pointcloud processing, SLAM, path planning, and C++/Python system integration.</p>
-
-        <!-- <div class="ctas">
-          <a class="btn btn-primary" href="#projects">View projects</a>
-          <a class="btn btn-ghost" href="#resume">Download resume</a>
-        </div> -->
-        <a class="btn btn-primary" href="./resource/resume.pdf" download>
-          Download Resume (EN)
-        </a>
-
-        <a class="btn btn-ghost" 
-          href="./resource/resume_cn.pdf" 
-          download 
-          style="margin-top:8px">
-          下载中文简历 (CN)
-        </a>
-
-        <div class="skills" aria-hidden>
-          <div class="chip">ROS / ROS2</div>
-          <div class="chip">SLAM (Cartographer, RTAB-Map)</div>
-          <div class="chip">Nav2 & planners</div>
-          <div class="chip">Pointcloud / PCL</div>
-          <div class="chip">Gazebo / Ignition</div>
-          <div class="chip">C++ / Python</div>
-          <div class="chip">Computer Vision</div>
-        </div>
+        <a class="lang" href="./index_zh.html">中文</a>
       </div>
 
-      <aside style="display:flex;flex-direction:column;gap:12px">
-        <div class="card">
-          <div style="font-weight:700">Quick stats</div>
-          <div style="display:flex;gap:12px;margin-top:8px">
-            <div style="flex:1;">10+ deployed robots<br><span class="meta">field & simulation</span></div>
-            <div style="flex:1;">100k+ km planned<br><span class="meta">cumulative tests</span></div>
-          </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="theme-toggle" class="icon-btn" aria-label="Toggle theme">🌙</button>
+        <button id="nav-burger" class="icon-btn nav-burger" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= Hero ================= -->
+  <header class="hero" id="top">
+    <canvas id="pointcloud" aria-hidden="true"></canvas>
+
+    <div class="wrap hero-inner">
+      <div class="hud-line mono">
+        <span class="dot"></span>
+        <span>Field Robotics — Malaysia</span>
+        <span class="hud-sep">/</span>
+        <span>Nav2 · SLAM · PCL</span>
+        <span class="hud-sep">/</span>
+        <span id="hud-scan">SCAN 000°</span>
+      </div>
+
+      <h1 class="hero-name">Brian<br /><span class="accent">Lai</span></h1>
+
+      <p class="hero-tagline">I build robots that <em>navigate the real world</em>.</p>
+
+      <p class="lead">
+        Robotics software engineer specialising in autonomous navigation stacks,
+        LiDAR perception pipelines, and simulation. I take field robots from
+        Gazebo to oil-palm plantations — and keep them driving.
+      </p>
+
+      <div class="ctas">
+        <a class="btn btn-primary" href="#projects">View projects</a>
+        <a class="btn btn-ghost" href="./resource/resume.pdf" download>Resume (EN)</a>
+        <a class="btn btn-ghost" href="./resource/resume_cn.pdf" download>简历 (CN)</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">10<em>+</em></div>
+          <div class="stat-label">Robots deployed</div>
         </div>
-
-        <div class="card" style="text-align:center">
-          <div style="font-weight:700">Resume</div>
-          <div class="meta">Download a PDF copy or view full details below.</div>
-          <div style="margin-top:12px">
-            <!-- <a class="btn btn-primary" href="./resource/resume.pdf" download>Download resume (PDF)</a> -->
-          <a class="btn btn-primary" href="./resource/resume.pdf" download>
-            EN
-          </a>
-
-          <a class="btn btn-ghost" 
-            href="./resource/resume_cn.pdf" 
-            download 
-            style="margin-top:8px">
-            中文 (CN)
-          </a>
-          </div>
+        <div class="stat">
+          <div class="stat-num">100k<em>+</em> km</div>
+          <div class="stat-label">Paths planned &amp; tested</div>
         </div>
-      </aside>
-    </section>
-
-    <!-- Industrial -->
-    <section id="industrial" style="margin-top:22px">
-      <h2 style="margin-bottom:8px">Industrial Experience</h2>
-      <div class="card" style="padding:18px; width:100%">
-
-        <div class="industrial-container">
-          <!-- Left (paragraph / detailed text) -->
-          <div class="industrial-left">
-            <h3 class="project-title">System Design & Deployment of ROS2 Navigation Stack</h3>
-            <p class="meta">
-              Designed and deployed a full ROS2 <b>Nav2-based navigation system</b> for agricultural robots 
-              in oil palm and chilli farm environments. Built a pointcloud fusion pipeline with the <b>PCL library</b>, 
-              integrating Livox Horizon and Velodyne LIDAR. Implemented voxel-grid downsampling, ROI segmentation, 
-              and Euclidean clustering for robust obstacle detection. <br><br>
-              Customized Nav2 <b>global/local planners</b>, optimized <b>Costmap2D layers</b>, 
-              and tuned local controllers for real-time dense terrain. 
-              Experienced in <b>ROS1 → ROS2 migration</b> of launch files, URDF/Xacro, plugins, 
-              and Gazebo simulation workflows. Validated through extensive <b>field testing</b>, 
-              ensuring navigation reliability across varied conditions.
-            </p>
-            <p class="meta" style="margin-top:8px">
-              <b>Tech Stack:</b> ROS1, ROS2, Nav2, C++, Python, PCL, Gazebo, RViz, Livox, Velodyne
-            </p>
-          </div>
-
-          <!-- Divider -->
-          <div class="industrial-divider"></div>
-
-          <!-- Right (point form) -->
-          <div class="industrial-right">
-            <ul>
-              <li>System-level navigation architecture & integration</li>
-              <li>Advanced costmap configuration & planner tuning in Nav2</li>
-              <li>Pointcloud fusion & 3D perception with PCL</li>
-              <li>Algorithm optimization for real-time robotics</li>
-              <li>ROS1 → ROS2 migration & compatibility</li>
-              <li>Extensive deployment & validation in agricultural environments</li>
-            </ul>
-          </div>
+        <div class="stat">
+          <div class="stat-num">4<em>+</em> yrs</div>
+          <div class="stat-label">ROS / ROS2 in production</div>
         </div>
       </div>
-    </section>
+    </div>
 
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <div class="ticker-group">
+          <span>ROS / ROS2</span><span>Nav2 &amp; planners</span><span>SLAM — Cartographer · RTAB-Map</span>
+          <span>Pointcloud / PCL</span><span>Gazebo / Ignition</span><span>C++ / Python</span>
+          <span>Computer vision</span><span>MoveIt</span><span>Livox · Velodyne LiDAR</span>
+        </div>
+        <div class="ticker-group">
+          <span>ROS / ROS2</span><span>Nav2 &amp; planners</span><span>SLAM — Cartographer · RTAB-Map</span>
+          <span>Pointcloud / PCL</span><span>Gazebo / Ignition</span><span>C++ / Python</span>
+          <span>Computer vision</span><span>MoveIt</span><span>Livox · Velodyne LiDAR</span>
+        </div>
+      </div>
+    </div>
+  </header>
 
+  <main class="wrap">
 
+    <!-- ================= Experience ================= -->
+    <section class="section" id="experience">
+      <div class="section-head reveal">
+        <span class="ghost-num">01</span>
+        <div class="section-index mono">// Experience</div>
+        <h2>Industrial &amp; research experience</h2>
+        <p>Production navigation systems for agricultural robots, plus postgraduate research on localization.</p>
+      </div>
 
-
-    <!-- Projects -->
-    <section id="projects" style="margin-top:18px">
-      <h2 style="margin-bottom:12px">Selected projects</h2>
-      <p class="meta">A curated selection — click any project to open details (link to repo, demo, or paper).</p>
-      <div class="grid" style="margin-top:12px">
-
-        <article class="card" style="padding:14px">
-          <div class="proj-img">BLDC FOC Motor Controller</div>
-          <h3 class="project-title">BLDC Motor FOC Controller</h3>
-
-          <div class="meta">
-            Designed a closed-loop <b>Field-Oriented Control (FOC)</b> velocity controller
-            for a 2804 BLDC motor using an <b>ESP32</b>, <b>DRV8313</b> three-phase driver,
-            and <b>MT6701</b> magnetic encoder in ABZ mode.
-            Includes a <b>Python GUI</b> with a real-time velocity slider and serial Commander
-            for live PID tuning.
-            <br><br>
-            <b>Tech:</b> ESP32 · SimpleFOC · PlatformIO · C++ · Python · FOC · BLDC · PID Control
-          </div>
-
-          <div style="margin-top:12px">
-            <img
-              src="./resource/bldc_motor_ui.png"
-              alt="BLDC Motor Controller Python UI"
-              style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px"
-            >
-          </div>
-
-          <div style="margin-top:12px">
-            <a href="https://github.com/zimbot97/bldc_motor_test" target="_blank">
-              Open repo →
-            </a>
-          </div>
-        </article>
-
-        <article class="card" style="padding:14px">
-          <div class="proj-img">AMCL vs ICP vs NDT</div>
-          <h3 class="project-title">Localization Comparison (AMCL / ICP / NDT)</h3>
-          <div class="meta">
-            Analysis of RPE/RTE, trajectory plots, and error statistics.  
-            Tools: ROS, PCL, Python (matplotlib).
-          </div>
-
-          <!-- GitHub Thumbnail -->
-          <div style="margin-top:12px">
-            <a href="https://github.com/zimbot97/ros2_ws" target="_blank">
-              <img src="./resource/proposed-high-res_1 11 Aug.png" 
-                  alt="AMCL vs ICP vs NDT project thumbnail" 
-                  style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px">
-            </a>
-          </div>
-
-          <!-- Links -->
-          <div style="margin-top:12px">
-            <a href="https://github.com/zimbot97/ros2_ws" aria-label="Open project">Open repo →</a> &nbsp;|&nbsp; 
-            <a href="https://thesai.org/Publications/ViewPaper?Volume=16&Issue=3&Code=ijacsa&SerialNo=100" aria-label="Read paper">
-              <img src="./resource/sai.png" alt="Paper Logo" style="height:50px; vertical-align:middle; margin-right:6px;">
-              Read paper →
-            </a>
-          </div>
-        </article>
-
-        <article class="card" style="padding:14px">
-          <div class="proj-img">6-DOF Arm</div>
-          <h3 class="project-title">6-DOF Arm URDF & control</h3>
-          <div class="meta">
-            URDF with mimic gripper, joint limits, and ros2_control integration for position and effort controllers.
-          </div>
-
-          <!-- YouTube Thumbnail -->
-          <div style="margin-top:12px">
-            <a href="https://www.youtube.com/watch?v=IXoSNhc9wtE" target="_blank">
-              <img src="https://img.youtube.com/vi/IXoSNhc9wtE/0.jpg" 
-                  alt="6-DOF Arm demo video" 
-                  style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px">
-            </a>
-          </div>
-
-          <!-- GitHub Link -->
-          <div style="margin-top:12px">
-            <a href="https://github.com/zimbot97/6dof_robotics_arm">Open repo →</a>
-          </div>
-        </article>
-
-        <article class="card" style="padding:14px">
-          <div class="proj-img">Self-Balancing Robot</div>
-          <h3 class="project-title">Self-Balancing Two-Wheel Robot</h3>
-
-          <div class="meta">
-            Designed and implemented a two-wheel self-balancing robot using 
-            <b>PID control</b> and real-time <b>IMU sensor fusion</b>.
-            Achieved stable balancing through continuous feedback control 
-            on embedded hardware.
-            <br><br>
-            <b>Tech:</b> Arduino / Embedded C · PID Control · IMU · Control Systems
-          </div>
-
-          <!-- YouTube Thumbnail with Play Button -->
-          <div style="margin-top:12px; position:relative;">
-            <a href="https://www.youtube.com/watch?v=rlDmU0SHkQA" target="_blank">
-              <img 
-                src="https://img.youtube.com/vi/rlDmU0SHkQA/maxresdefault.jpg"
-                alt="Self-balancing robot demo"
-                style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px"
-              >
-              
-              <!-- Play button overlay -->
-              <div style="
-                position:absolute;
-                top:50%; left:50%;
-                transform:translate(-50%, -50%);
-                background:rgba(0,0,0,0.6);
-                border-radius:50%;
-                width:60px; height:60px;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                color:white;
-                font-size:24px;
-              ">
-                ▶
+      <div class="exp-grid">
+        <div class="exp-main">
+          <article class="card corners reveal">
+            <div class="exp-header">
+              <div>
+                <h3>ROS2 Navigation Stack — Design &amp; Deployment</h3>
+                <div class="exp-org">Braintree Technologies · Robotics Software Engineer</div>
               </div>
-            </a>
-          </div>
+              <div class="exp-date">2021 — PRESENT</div>
+            </div>
+            <div class="exp-body">
+              Designed and deployed a full ROS2 <b>Nav2-based navigation system</b> for
+              agricultural robots operating in oil-palm and chilli farm environments.
+              Built a pointcloud-fusion pipeline with <b>PCL</b>, integrating Livox Horizon
+              and Velodyne LiDAR — voxel-grid downsampling, ROI segmentation, and Euclidean
+              clustering for robust obstacle detection.
+              <ul>
+                <li>Customized Nav2 <b>global/local planners</b> and optimized <b>Costmap2D layers</b> for real-time dense terrain</li>
+                <li><b>ROS1 → ROS2 migration</b>: launch files, URDF/Xacro, plugins, Gazebo workflows</li>
+                <li>Custom ROS plugins, MoveIt arm integration, and object-detection perception pipelines</li>
+                <li>Hardware bring-up: RealSense, Jetson, Arduino, Teensy — drivers, networking, deployment</li>
+                <li>Validated through extensive <b>field testing</b> across varied outdoor conditions</li>
+              </ul>
+            </div>
+            <div class="tags" style="margin-top:18px">
+              <span class="tag">ROS1/ROS2</span><span class="tag">Nav2</span><span class="tag">C++</span>
+              <span class="tag">Python</span><span class="tag">PCL</span><span class="tag">Gazebo</span>
+              <span class="tag">Livox</span><span class="tag">Velodyne</span>
+            </div>
+          </article>
 
-          <!-- Links -->
-          <div style="margin-top:12px">
-            <a href="https://github.com/zimbot97/Self-balancing-two-wheels-robot" target="_blank">
-              Open repo →
-            </a>
-            &nbsp;|&nbsp;
-            <a href="https://www.youtube.com/watch?v=rlDmU0SHkQA" target="_blank">
-              Watch video →
-            </a>
+          <article class="card corners reveal">
+            <div class="exp-header">
+              <div>
+                <h3>Localization Research for Mobile Robotics</h3>
+                <div class="exp-org">Universiti Teknologi Malaysia · MPhil Researcher</div>
+              </div>
+              <div class="exp-date">2022 — PRESENT</div>
+            </div>
+            <div class="exp-body">
+              <ul style="margin-top:0">
+                <li>Enhanced scan-matching algorithms to improve positional accuracy and robustness</li>
+                <li>Built agricultural simulation environments to benchmark localization methods</li>
+                <li>Published a comparative study of AMCL / ICP / NDT localization (IJACSA)</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <aside class="card reveal">
+          <p class="panel-label">// Deployment environments</p>
+          <div class="field-photos">
+            <figure>
+              <img src="./resource/palm_oil.jpg" alt="Oil palm plantation deployment environment" loading="lazy" />
+              <figcaption>[ oil-palm plantation ]</figcaption>
+            </figure>
+            <figure>
+              <img src="./resource/chilli.jpg" alt="Chilli farm deployment environment" loading="lazy" />
+              <figcaption>[ chilli farm ]</figcaption>
+            </figure>
+          </div>
+          <p class="side-note">
+            Dense vegetation, uneven terrain, GPS-degraded rows — the environments these
+            navigation stacks were tuned and validated in.
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ================= Projects ================= -->
+    <section class="section" id="projects">
+      <div class="section-head reveal">
+        <span class="ghost-num">02</span>
+        <div class="section-index mono">// Projects</div>
+        <h2>Selected projects</h2>
+        <p>A curated selection — each links to the repo, demo video, or published paper.</p>
+      </div>
+
+      <div class="projects">
+
+        <article class="card proj reveal">
+          <a class="proj-media" href="https://github.com/zimbot97/ros2_ws" target="_blank" rel="noopener">
+            <img src="./resource/proposed-high-res_1 11 Aug.png" alt="AMCL vs ICP vs NDT trajectory comparison" loading="lazy" />
+          </a>
+          <div class="proj-info">
+            <div class="proj-id">P-01 / LOCALIZATION</div>
+            <h3>Localization Comparison — AMCL / ICP / NDT</h3>
+            <p class="proj-desc">
+              Benchmark of three localization approaches in agricultural simulation:
+              RPE/RTE metrics, trajectory plots, and error statistics.
+              Published in <b>IJACSA Vol. 16</b>.
+            </p>
+            <div class="tags">
+              <span class="tag">ROS2</span><span class="tag">PCL</span><span class="tag">Python</span><span class="tag">matplotlib</span>
+            </div>
+            <div class="proj-links">
+              <a href="https://github.com/zimbot97/ros2_ws" target="_blank" rel="noopener">Repo →</a>
+              <a href="https://thesai.org/Publications/ViewPaper?Volume=16&Issue=3&Code=ijacsa&SerialNo=100" target="_blank" rel="noopener">Paper →</a>
+            </div>
           </div>
         </article>
 
+        <article class="card proj flip reveal">
+          <a class="proj-media" href="https://github.com/zimbot97/bldc_motor_test" target="_blank" rel="noopener">
+            <img src="./resource/bldc_motor_ui.png" alt="BLDC motor controller Python UI" loading="lazy" />
+          </a>
+          <div class="proj-info">
+            <div class="proj-id">P-02 / MOTOR CONTROL</div>
+            <h3>BLDC Motor FOC Controller</h3>
+            <p class="proj-desc">
+              Closed-loop <b>field-oriented control</b> velocity controller for a 2804 BLDC
+              motor — ESP32 + DRV8313 three-phase driver + MT6701 magnetic encoder (ABZ mode),
+              with a Python GUI for live PID tuning over serial.
+            </p>
+            <div class="tags">
+              <span class="tag">ESP32</span><span class="tag">SimpleFOC</span><span class="tag">C++</span><span class="tag">PID</span><span class="tag">Python GUI</span>
+            </div>
+            <div class="proj-links">
+              <a href="https://github.com/zimbot97/bldc_motor_test" target="_blank" rel="noopener">Repo →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card proj reveal">
+          <a class="proj-media" href="https://www.youtube.com/watch?v=IXoSNhc9wtE" target="_blank" rel="noopener">
+            <img src="https://img.youtube.com/vi/IXoSNhc9wtE/hqdefault.jpg" alt="6-DOF robotic arm demo video" loading="lazy" />
+            <span class="play-badge">▶</span>
+          </a>
+          <div class="proj-info">
+            <div class="proj-id">P-03 / MANIPULATION</div>
+            <h3>6-DOF Arm — URDF &amp; Control</h3>
+            <p class="proj-desc">
+              URDF with mimic gripper joints and joint limits, integrated with
+              <b>ros2_control</b> for position and effort controllers.
+            </p>
+            <div class="tags">
+              <span class="tag">URDF/Xacro</span><span class="tag">ros2_control</span><span class="tag">MoveIt</span>
+            </div>
+            <div class="proj-links">
+              <a href="https://github.com/zimbot97/6dof_robotics_arm" target="_blank" rel="noopener">Repo →</a>
+              <a href="https://www.youtube.com/watch?v=IXoSNhc9wtE" target="_blank" rel="noopener">Demo →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card proj flip reveal">
+          <a class="proj-media" href="https://www.youtube.com/watch?v=rlDmU0SHkQA" target="_blank" rel="noopener">
+            <img src="https://img.youtube.com/vi/rlDmU0SHkQA/maxresdefault.jpg" alt="Self-balancing two-wheel robot demo video" loading="lazy" />
+            <span class="play-badge">▶</span>
+          </a>
+          <div class="proj-info">
+            <div class="proj-id">P-04 / CONTROL SYSTEMS</div>
+            <h3>Self-Balancing Two-Wheel Robot</h3>
+            <p class="proj-desc">
+              Two-wheel inverted-pendulum robot balanced with <b>PID control</b> and
+              real-time <b>IMU sensor fusion</b> on embedded hardware.
+            </p>
+            <div class="tags">
+              <span class="tag">Arduino</span><span class="tag">Embedded C</span><span class="tag">PID</span><span class="tag">IMU</span>
+            </div>
+            <div class="proj-links">
+              <a href="https://github.com/zimbot97/Self-balancing-two-wheels-robot" target="_blank" rel="noopener">Repo →</a>
+              <a href="https://www.youtube.com/watch?v=rlDmU0SHkQA" target="_blank" rel="noopener">Demo →</a>
+            </div>
+          </div>
+        </article>
 
       </div>
     </section>
 
-    
+    <!-- ================= 3D Showcase ================= -->
+    <section class="section" id="showcase">
+      <div class="section-head reveal">
+        <span class="ghost-num">03</span>
+        <div class="section-index mono">// 3D Scan</div>
+        <h2>Gaussian splat showcase</h2>
+        <p>An interactive 3D reconstruction rendered directly in your browser with Gaussian splatting. Drag to orbit, scroll to zoom, right-drag to pan.</p>
+      </div>
 
-    <!-- Resume -->
-    <section id="resume" style="margin-top:22px">
-      <h2 style="margin-bottom:8px">Resume</h2>
-      <div class="two-col" style="margin-top:12px">
-        <div class="card resume-card">
-          
-          <!-- Experience -->
-          <div style="font-weight:800">Experience</div>
-          <div style="color:var(--muted)">
-            Robotics Software Engineer — Braintree Technologies (2021–Present)
-            <ul style="margin-top:8px;color:var(--muted)">
-              <li>Designed and implemented navigation systems using ROS1/ROS2 and C++ for autonomous robotics.</li>
-              <li>Applied machine learning techniques to enhance autonomy and decision-making performance.</li>
-              <li>Developed simulation workflows in Gazebo and validated systems through field testing.</li>
-              <li>Processed and analyzed sensor data—including images, point clouds, and IMU inputs—for real-time localization and perception.</li>
-              <li>Designed and implemented custom ROS plugins to extend system functionality and optimize robot performance.</li>
-              <li>Integrated MoveIt for robotic arm motion planning and manipulation tasks.</li>
-              <li>Implemented object detection and perception pipelines to enable environment-aware interactions.</li>
-              <li>Set up and configured robotics Linux systems, including device drivers, networking, and deployment environments.</li>
-              <li>Integrated hardware such as RealSense, Jetson, Arduino, and Teensy to support prototyping and deployment.</li>
-              <li>Coordinated with clients, vendors, and multidisciplinary teams to deliver robust robotic solutions.</li>
-            </ul>
+      <div class="card corners splat-card reveal">
+        <div class="splat-stage" id="splat-stage"
+             data-msg-Searching="probing for hosted model…"
+             data-msg-Loading="loading splats… (may take a moment)"
+             data-msg-Ready="ready — drag to orbit, scroll to zoom"
+             data-msg-Notfound="no model found — upload one as resource/scene.splat"
+             data-msg-Badformat="unsupported file — use .ply / .splat / .ksplat"
+             data-msg-Error="failed to load model — see browser console">
+          <div class="splat-placeholder" id="splat-placeholder">
+            <div class="reticle" aria-hidden="true"></div>
+            <p>3D scene viewer — click <b>Load 3D model</b> to fetch and render the Gaussian splat scan.</p>
           </div>
+        </div>
+        <div class="splat-toolbar">
+          <div class="splat-status mono" id="splat-status">idle</div>
+          <div class="splat-actions">
+            <button class="btn btn-ghost" id="splat-file-btn">Open local file…</button>
+            <button class="btn btn-primary" id="splat-load">Load 3D model</button>
+            <input type="file" id="splat-file" accept=".ply,.splat,.ksplat" hidden />
+          </div>
+        </div>
+      </div>
 
-          <!-- Postgraduate Experience -->
-          <div style="font-weight:800;margin-top:12px">Postgraduate Experience</div>
-          <div style="color:var(--muted)">
-            MPhil Researcher, Universiti Teknologi Malaysia (2022–Present)
-            <ul style="margin-top:8px;color:var(--muted)">
-              <li>Conducting advanced research on localization techniques for mobile robotics</li>
-              <li>Enhanced scan-matching algorithms to improve positional accuracy and robustness</li>
-              <li>Built agricultural simulation environments to benchmark and compare localization methods</li>
-              <li>Performed literature reviews of state-of-the-art techniques to inform research direction</li>
-            </ul>
-          </div>
+      <p class="splat-hint reveal">
+        Viewer powered by <a href="https://github.com/mkkellogg/GaussianSplats3D" target="_blank" rel="noopener">GaussianSplats3D</a>.
+        The hosted model is served from <code>resource/scene.splat</code> (also accepts <code>.ksplat</code> or <code>.ply</code>).
+      </p>
+    </section>
 
-          <!-- Education -->
-          <div style="font-weight:800;margin-top:12px">Education</div>
-          <div class="meta">
-            Universiti Teknologi Malaysia (UTM) — Master of Philosophy (Robotics & Localization) (2022–Present)
-          </div>
-          <div class="meta" style="margin-top:4px">
-            Universiti Teknologi Malaysia (UTM) — Bachelor of Electronic Systems Engineering (2017–2021)
-          </div>
+    <!-- ================= Skills ================= -->
+    <section class="section" id="skills">
+      <div class="section-head reveal">
+        <span class="ghost-num">04</span>
+        <div class="section-index mono">// Skills</div>
+        <h2>Skills &amp; tools</h2>
+      </div>
 
-          <!-- Resume download & contact -->
-          <div style="margin-top:12px">
-            <a class="btn btn-primary download" href="./resource/resume.pdf" download>Download resume (PDF)</a>
-            <a class="btn btn-ghost" style="margin-left:8px" href="#contact">Contact</a>
+      <div class="skills-grid">
+        <div class="card skill-group reveal">
+          <h3>Autonomy &amp; Navigation</h3>
+          <div class="chips">
+            <span class="chip">ROS / ROS2</span><span class="chip">Nav2 &amp; planners</span>
+            <span class="chip">SLAM (Cartographer, RTAB-Map)</span><span class="chip">MoveIt</span>
+            <span class="chip">Costmap2D tuning</span>
+          </div>
+        </div>
+        <div class="card skill-group reveal">
+          <h3>Perception</h3>
+          <div class="chips">
+            <span class="chip">Pointcloud / PCL</span><span class="chip">OpenCV</span>
+            <span class="chip">Sensor fusion</span><span class="chip">Object detection</span>
+            <span class="chip">LiDAR (Livox, Velodyne)</span>
+          </div>
+        </div>
+        <div class="card skill-group reveal">
+          <h3>Engineering</h3>
+          <div class="chips">
+            <span class="chip">C++ / Python</span><span class="chip">Gazebo / Ignition</span>
+            <span class="chip">Embedded (ESP32, Teensy)</span><span class="chip">Linux systems</span>
+            <span class="chip">Git &amp; CI/CD</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= Resume ================= -->
+    <section class="section" id="resume">
+      <div class="section-head reveal">
+        <span class="ghost-num">05</span>
+        <div class="section-index mono">// Resume</div>
+        <h2>Background</h2>
+      </div>
+
+      <div class="resume-grid">
+        <div class="card corners reveal">
+          <div class="timeline">
+            <div class="timeline-item">
+              <h3>Robotics Software Engineer</h3>
+              <div class="where">Braintree Technologies</div>
+              <div class="when">2021 — PRESENT</div>
+              <p>Navigation systems in ROS1/ROS2 &amp; C++, machine-learning-assisted autonomy,
+                 Gazebo simulation workflows, sensor processing (images, pointclouds, IMU),
+                 custom ROS plugins, and client-facing delivery of field robots.</p>
+            </div>
+            <div class="timeline-item">
+              <h3>MPhil Researcher — Robotics &amp; Localization</h3>
+              <div class="where">Universiti Teknologi Malaysia (UTM)</div>
+              <div class="when">2022 — PRESENT</div>
+              <p>Advanced research on localization for mobile robots: enhanced scan-matching,
+                 agricultural benchmark environments, and state-of-the-art literature reviews.</p>
+            </div>
+            <div class="timeline-item">
+              <h3>BEng Electronic Systems Engineering</h3>
+              <div class="where">Universiti Teknologi Malaysia (UTM)</div>
+              <div class="when">2017 — 2021</div>
+            </div>
           </div>
         </div>
 
-        <!-- Sidebar -->
-        <aside class="card" style="padding:16px">
-          <div style="font-weight:700">Skills & Tools</div>
-          <div class="meta" style="margin-top:8px">
-            ROS / ROS2 · C++ · Python · PCL · OpenCV · Gazebo / Ignition · Nav2 · SLAM · Git · CI/CD
-          </div>
-
-          <div style="margin-top:12px">
-            <div style="font-weight:700">Links</div>
-            <div style="margin-top:8px;color:var(--muted)">
-              <div>GitHub: <a href="https://github.com/zimbot97">github.com/zimbot97</a></div>
-              <div>LinkedIn: <a href="https://linkedin.com/in/brianlailaphong">linkedin.com/in/brianlailaphong</a></div>
+        <aside class="resume-side">
+          <div class="card reveal">
+            <p class="panel-label">// Download resume</p>
+            <p>Full PDF versions in English and Chinese.</p>
+            <div class="btn-row">
+              <a class="btn btn-primary" href="./resource/resume.pdf" download>PDF (EN)</a>
+              <a class="btn btn-ghost" href="./resource/resume_cn.pdf" download>PDF (中文)</a>
             </div>
+          </div>
+          <div class="card reveal">
+            <p class="panel-label">// Publication</p>
+            <p>
+              Comparative analysis of AMCL, ICP &amp; NDT localization —
+              <a href="https://thesai.org/Publications/ViewPaper?Volume=16&Issue=3&Code=ijacsa&SerialNo=100" target="_blank" rel="noopener">IJACSA, Vol. 16 No. 3</a>
+            </p>
+          </div>
+          <div class="card reveal">
+            <p class="panel-label">// Links</p>
+            <p>
+              GitHub — <a href="https://github.com/zimbot97" target="_blank" rel="noopener">github.com/zimbot97</a><br />
+              LinkedIn — <a href="https://linkedin.com/in/brianlailaphong" target="_blank" rel="noopener">linkedin.com/in/brianlailaphong</a>
+            </p>
           </div>
         </aside>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" style="margin-top:22px">
-      <h2 style="margin-bottom:8px">Contact</h2>
-      <div class="card" style="padding:18px;display:flex;flex-direction:column;gap:10px">
-        <div class="meta">Email: <a href="mailto:brian_llh@hotmail.com">brian_llh@hotmail.com</a></div>
-        <div class="meta">Location: Malaysia</div>
-
-        <!-- Mailto button -->
-        <a class="btn btn-primary" 
-          href="mailto:brian_llh@hotmail.com?subject=Contact from Website&body=Hi Brian,">
-          Send Email
-        </a>
+    <!-- ================= Contact ================= -->
+    <section class="section" id="contact">
+      <div class="card corners contact-card reveal">
+        <div class="section-index mono">// 06 — Contact</div>
+        <h2>Let's build something autonomous.</h2>
+        <p>Open to robotics engineering roles, research collaborations, and interesting field-robotics problems. Based in Malaysia.</p>
+        <a class="btn btn-primary" href="mailto:brian_llh@hotmail.com?subject=Contact from Website&body=Hi Brian,">Send an email</a>
+        <div class="contact-links">
+          <a href="mailto:brian_llh@hotmail.com">brian_llh@hotmail.com</a>
+          <a href="https://github.com/zimbot97" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/brianlailaphong" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
       </div>
     </section>
 
-  </div>
+  </main>
 
-  <script>
-    const root = document.documentElement;
-    const toggleBtn = document.getElementById("theme-toggle");
+  <footer>
+    <div class="wrap footer-inner">
+      <div>© 2026 Brian Lai — Robotics Software Engineer</div>
+      <div class="mono">nav · perception · slam · ros2</div>
+    </div>
+  </footer>
 
-    // Load saved theme or system preference
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      root.setAttribute("data-theme", savedTheme);
-    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      root.setAttribute("data-theme", "dark");
-    }
-
-    toggleBtn.addEventListener("click", () => {
-      if (root.getAttribute("data-theme") === "dark") {
-        root.setAttribute("data-theme", "light");
-        localStorage.setItem("theme", "light");
-      } else {
-        root.setAttribute("data-theme", "dark");
-        localStorage.setItem("theme", "dark");
-      }
-    });
-  </script>
+  <script src="./assets/main.js" type="module"></script>
 
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XYKCB21JE3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-XYKCB21JE3');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XYKCB21JE3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XYKCB21JE3');
+  </script>
 </body>
 </html>

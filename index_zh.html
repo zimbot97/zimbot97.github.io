@@ -3,483 +3,464 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>机器人作品集 — Brian Lai</title>
-  <meta name="description" content="机器人作品集与简历 — 导航、感知、仿真及 ROS 项目。" />
-  <style>
-    :root {
-      --bg: #ffffff;
-      --card: #f8fafc;
-      --muted: #4b5563;
-      --accent: #0ea5a4;
-      --text: #111827;
-    }
+  <title>Brian Lai — 机器人软件工程师</title>
+  <meta name="description" content="Brian Lai 的机器人作品集 — 自主导航、感知、SLAM 及 ROS/ROS2 田间机器人系统。" />
+  <meta property="og:title" content="Brian Lai — 机器人软件工程师" />
+  <meta property="og:description" content="自主导航、感知、SLAM 及 ROS/ROS2 田间机器人系统。" />
+  <meta property="og:type" content="website" />
 
-    [data-theme="dark"] {
-      --bg: #0f1724;
-      --card: #0b1220;
-      --muted: #9aa4b2;
-      --accent: #6ee7b7;
-      --text: #e6eef6;
-    }
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./assets/style.css" />
 
-
-    * { box-sizing: border-box; }
-    html,body {
-      height:100%;
-      margin:0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color: var(--text);
-      transition: background 0.3s, color 0.3s;
+  <!-- Gaussian splat viewer (lazy-loaded on demand by assets/main.js) -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "@mkkellogg/gaussian-splats-3d": "https://unpkg.com/@mkkellogg/gaussian-splats-3d@0.4/build/gaussian-splats-3d.module.js"
     }
-     [data-theme="dark"] body {
-      background: #000000;
-    }
-
-    /* Industrial section layout */
-    .industrial-container {
-      display: flex;
-      gap: 20px;
-    }
-
-    .industrial-left {
-      flex: 1;
-      padding-right: 16px;
-    }
-
-    .industrial-divider {
-      width: 1px;
-      background: #ccc;
-    }
-
-    .industrial-right {
-      flex: 1;
-    }
-
-    .industrial-right ul {
-      margin: 0;
-      padding-left: 20px;
-      color: var(--muted);
-    }
-
-@media (max-width: 768px) {
-  .industrial-container {
-    flex-direction: column;
   }
-  .industrial-left,
-  .industrial-divider {
-    display: none;
-  }
-  .industrial-right {
-    width: 100%;
-  }
-}
-
-    a { color: var(--accent); text-decoration:none; }
-    .wrap{max-width:1100px;margin:32px auto;padding:24px}
-    header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px}
-    .brand{display:flex;gap:12px;align-items:center}
-    .logo{width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#0ea5a4,#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:700;color:#042028}
-    nav a{margin-left:18px;font-weight:600;font-size:14px;color:var(--muted)}
-    .hero{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:center;margin-bottom:28px}
-    .card{background: var(--card);padding:20px;border-radius:12px;box-shadow:0 6px 18px rgba(2,6,23,0.2);border:1px solid rgba(0,0,0,0.05)}
-    h1{margin:0;font-size:30px}
-    p.lead{color:var(--muted);margin-top:10px;line-height:1.5}
-    .ctas{margin-top:16px;display:flex;gap:12px}
-    .btn{padding:10px 14px;border-radius:10px;font-weight:700;border:none;cursor:pointer}
-    .btn-primary{background:linear-gradient(90deg,var(--accent),#34d399);color:#fff}
-    .btn-ghost{background:transparent;color:var(--muted);border:1px solid rgba(0,0,0,0.1)}
-    [data-theme="dark"] .btn-ghost{border:1px solid rgba(255,255,255,0.04)}
-    .skills{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-    .chip{background:rgba(0,0,0,0.03);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted);border:1px solid rgba(0,0,0,0.05)}
-    [data-theme="dark"] .chip{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.02)}
-
-    /* Projects grid */
-    .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-    .project-title{font-size:16px;margin:0}
-    .meta{color:var(--muted);font-size:13px;margin-top:8px}
-    .proj-img{height:130px;border-radius:8px;background:linear-gradient(135deg,#e2e8f0,#f1f5f9);display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700}
-    [data-theme="dark"] .proj-img{background:linear-gradient(135deg,#072033,#0b1320)}
-
-    /* Resume & contact */
-    .two-col{display:grid;grid-template-columns:1fr 360px;gap:18px}
-    .resume-card{display:flex;flex-direction:column;gap:12px}
-    .download{display:inline-flex;align-items:center;gap:8px}
-
-    footer{margin-top:36px;color:var(--muted);font-size:13px;text-align:center}
-
-    /* Responsive */
-    @media (max-width:960px){.hero{grid-template-columns:1fr} .two-col{grid-template-columns:1fr} .grid{grid-template-columns:repeat(2,1fr)} }
-    @media (max-width:560px){.grid{grid-template-columns:1fr} .brand .logo{width:46px;height:46px}}
-
-    /* Mobile nav */
-    @media (max-width:640px){
-      .wrap{padding:16px}
-      header{flex-wrap:wrap;gap:10px}
-      nav{display:flex;flex-wrap:wrap;gap:4px;align-items:center}
-      nav a{margin-left:10px;font-size:13px}
-      h1{font-size:22px}
-    }
-  </style>
+  </script>
 </head>
 <body>
-  <div class="wrap">
-    <header>
-      <div class="brand">
+
+  <!-- ================= 导航 ================= -->
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top">
         <div class="logo">BL</div>
         <div>
-          <div style="font-weight:800">Brian Lai</div>
-          <div style="font-size:13px;color:var(--muted)">机器人软件工程师 — 导航 · 感知 · ROS</div>
+          <div class="brand-name">BRIAN LAI</div>
+          <div class="brand-role">机器人软件工程师</div>
         </div>
-      </div>
-      <nav>
+      </a>
+
+      <div class="nav-links" id="nav-links">
+        <a href="#experience">经历</a>
         <a href="#projects">项目</a>
+        <a href="#showcase">3D 展示</a>
         <a href="#resume">简历</a>
         <a href="#contact">联系</a>
-        <a href="./index.html" style="margin-left:18px;font-weight:600;font-size:14px">English</a>
-        <button id="theme-toggle" class="btn btn-ghost" style="margin-left:12px">🌞 / 🌙</button>
-      </nav>
-    </header>
-
-    <!-- Hero -->
-    <section class="hero card">
-      <div>
-        <h1>机器人作品集 — 导航、感知与仿真</h1>
-        <p class="lead">专注于设计、实现与调优自主导航栈、感知流水线及仿真环境。主要工具：ROS / ROS2、Gazebo / Ignition (ros_gz)、点云处理、SLAM、路径规划，以及 C++/Python 系统集成。</p>
-
-        <a class="btn btn-primary" href="./resource/resume.pdf" download>
-          下载英文简历 (EN)
-        </a>
-
-        <a class="btn btn-ghost"
-          href="./resource/resume_cn.pdf"
-          download
-          style="margin-top:8px">
-          下载中文简历 (CN)
-        </a>
-
-        <div class="skills" aria-hidden>
-          <div class="chip">ROS / ROS2</div>
-          <div class="chip">SLAM（Cartographer、RTAB-Map）</div>
-          <div class="chip">Nav2 与路径规划</div>
-          <div class="chip">点云 / PCL</div>
-          <div class="chip">Gazebo / Ignition</div>
-          <div class="chip">C++ / Python</div>
-          <div class="chip">计算机视觉</div>
-        </div>
+        <a class="lang" href="./index.html">EN</a>
       </div>
 
-      <aside style="display:flex;flex-direction:column;gap:12px">
-        <div class="card">
-          <div style="font-weight:700">快速统计</div>
-          <div style="display:flex;gap:12px;margin-top:8px">
-            <div style="flex:1;">10+ 台部署机器人<br><span class="meta">实地与仿真</span></div>
-            <div style="flex:1;">100k+ 公里规划<br><span class="meta">累计测试</span></div>
-          </div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="theme-toggle" class="icon-btn" aria-label="切换主题">🌙</button>
+        <button id="nav-burger" class="icon-btn nav-burger" aria-label="菜单">☰</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================= 首屏 ================= -->
+  <header class="hero" id="top">
+    <canvas id="pointcloud" aria-hidden="true"></canvas>
+
+    <div class="wrap hero-inner">
+      <div class="hud-line mono">
+        <span class="dot"></span>
+        <span>田间机器人 — 马来西亚</span>
+        <span class="hud-sep">/</span>
+        <span>Nav2 · SLAM · PCL</span>
+        <span class="hud-sep">/</span>
+        <span id="hud-scan">SCAN 000°</span>
+      </div>
+
+      <h1 class="hero-name">Brian<br /><span class="accent">Lai</span></h1>
+
+      <p class="hero-tagline">我构建能在<em>真实世界中导航</em>的机器人。</p>
+
+      <p class="lead">
+        机器人软件工程师，专注于自主导航栈、LiDAR 感知流水线与仿真。
+        我让田间机器人从 Gazebo 仿真走进油棕种植园 — 并持续可靠地运行。
+      </p>
+
+      <div class="ctas">
+        <a class="btn btn-primary" href="#projects">查看项目</a>
+        <a class="btn btn-ghost" href="./resource/resume_cn.pdf" download>中文简历</a>
+        <a class="btn btn-ghost" href="./resource/resume.pdf" download>Resume (EN)</a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">10<em>+</em></div>
+          <div class="stat-label">台机器人部署</div>
         </div>
-
-        <div class="card" style="text-align:center">
-          <div style="font-weight:700">简历下载</div>
-          <div class="meta">下载 PDF 版本或查看以下详细内容。</div>
-          <div style="margin-top:12px">
-          <a class="btn btn-primary" href="./resource/resume.pdf" download>
-            英文 (EN)
-          </a>
-
-          <a class="btn btn-ghost"
-            href="./resource/resume_cn.pdf"
-            download
-            style="margin-top:8px">
-            中文 (CN)
-          </a>
-          </div>
+        <div class="stat">
+          <div class="stat-num">100k<em>+</em> km</div>
+          <div class="stat-label">累计路径规划与测试</div>
         </div>
-      </aside>
-    </section>
-
-    <!-- Industrial -->
-    <section id="industrial" style="margin-top:22px">
-      <h2 style="margin-bottom:8px">工业经验</h2>
-      <div class="card" style="padding:18px; width:100%">
-
-        <div class="industrial-container">
-          <!-- Left -->
-          <div class="industrial-left">
-            <h3 class="project-title">ROS2 导航栈系统设计与部署</h3>
-            <p class="meta">
-              为农业机器人（油棕与辣椒种植环境）设计并部署完整的 ROS2 <b>Nav2 导航系统</b>。
-              使用 <b>PCL 库</b>构建点云融合流水线，集成 Livox Horizon 与 Velodyne 激光雷达。
-              实现体素网格降采样、ROI 分割及欧氏距离聚类，实现鲁棒障碍物检测。<br><br>
-              自定义 Nav2 <b>全局/局部规划器</b>，优化 <b>Costmap2D 层</b>，
-              针对实时密集地形调优局部控制器。
-              具备 <b>ROS1 → ROS2 迁移</b>经验，涵盖 launch 文件、URDF/Xacro、插件及 Gazebo 仿真工作流。
-              通过大量<b>实地测试</b>验证系统，确保在多变环境下的导航可靠性。
-            </p>
-            <p class="meta" style="margin-top:8px">
-              <b>技术栈：</b>ROS1、ROS2、Nav2、C++、Python、PCL、Gazebo、RViz、Livox、Velodyne
-            </p>
-          </div>
-
-          <!-- Divider -->
-          <div class="industrial-divider"></div>
-
-          <!-- Right -->
-          <div class="industrial-right">
-            <ul>
-              <li>系统级导航架构设计与集成</li>
-              <li>Nav2 高级代价地图配置与规划器调优</li>
-              <li>基于 PCL 的点云融合与三维感知</li>
-              <li>实时机器人算法优化</li>
-              <li>ROS1 → ROS2 迁移与兼容性</li>
-              <li>农业环境下的大规模部署与验证</li>
-            </ul>
-          </div>
+        <div class="stat">
+          <div class="stat-num">4<em>+</em> 年</div>
+          <div class="stat-label">ROS / ROS2 生产环境经验</div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Projects -->
-    <section id="projects" style="margin-top:18px">
-      <h2 style="margin-bottom:12px">精选项目</h2>
-      <p class="meta">精选作品展示 — 点击任意项目可查看详情（代码仓库、演示或论文）。</p>
-      <div class="grid" style="margin-top:12px">
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <div class="ticker-group">
+          <span>ROS / ROS2</span><span>Nav2 与路径规划</span><span>SLAM — Cartographer · RTAB-Map</span>
+          <span>点云 / PCL</span><span>Gazebo / Ignition</span><span>C++ / Python</span>
+          <span>计算机视觉</span><span>MoveIt</span><span>Livox · Velodyne 激光雷达</span>
+        </div>
+        <div class="ticker-group">
+          <span>ROS / ROS2</span><span>Nav2 与路径规划</span><span>SLAM — Cartographer · RTAB-Map</span>
+          <span>点云 / PCL</span><span>Gazebo / Ignition</span><span>C++ / Python</span>
+          <span>计算机视觉</span><span>MoveIt</span><span>Livox · Velodyne 激光雷达</span>
+        </div>
+      </div>
+    </div>
+  </header>
 
-        <article class="card" style="padding:14px">
-          <div class="proj-img">BLDC FOC 电机控制器</div>
-          <h3 class="project-title">BLDC 无刷电机 FOC 控制器</h3>
+  <main class="wrap">
 
-          <div class="meta">
-            使用 <b>ESP32</b>、<b>DRV8313</b> 三相驱动板及 ABZ 模式的 <b>MT6701</b> 磁性编码器，
-            为 2804 无刷电机设计了闭环<b>磁场定向控制（FOC）</b>速度控制器。
-            包含带实时速度滑块的 <b>Python 图形界面</b>及串口 Commander，支持在线 PID 调参。
-            <br><br>
-            <b>技术：</b>ESP32 · SimpleFOC · PlatformIO · C++ · Python · FOC · BLDC · PID 控制
-          </div>
+    <!-- ================= 经历 ================= -->
+    <section class="section" id="experience">
+      <div class="section-head reveal">
+        <span class="ghost-num">01</span>
+        <div class="section-index mono">// 经历</div>
+        <h2>工业与研究经历</h2>
+        <p>农业机器人生产级导航系统开发，以及定位技术方向的研究生研究。</p>
+      </div>
 
-          <div style="margin-top:12px">
-            <img
-              src="./resource/bldc_motor_ui.png"
-              alt="BLDC 电机控制器 Python 界面"
-              style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px"
-            >
-          </div>
-
-          <div style="margin-top:12px">
-            <a href="https://github.com/zimbot97/bldc_motor_test" target="_blank">
-              查看仓库 →
-            </a>
-          </div>
-        </article>
-
-        <article class="card" style="padding:14px">
-          <div class="proj-img">AMCL vs ICP vs NDT</div>
-          <h3 class="project-title">定位算法对比（AMCL / ICP / NDT）</h3>
-          <div class="meta">
-            分析 RPE/RTE、轨迹图及误差统计。
-            工具：ROS、PCL、Python（matplotlib）。
-          </div>
-
-          <div style="margin-top:12px">
-            <a href="https://github.com/zimbot97/ros2_ws" target="_blank">
-              <img src="./resource/proposed-high-res_1 11 Aug.png"
-                  alt="AMCL vs ICP vs NDT 项目缩略图"
-                  style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px">
-            </a>
-          </div>
-
-          <div style="margin-top:12px">
-            <a href="https://github.com/zimbot97/ros2_ws" aria-label="查看项目">查看仓库 →</a> &nbsp;|&nbsp;
-            <a href="https://thesai.org/Publications/ViewPaper?Volume=16&Issue=3&Code=ijacsa&SerialNo=100" aria-label="阅读论文">
-              <img src="./resource/sai.png" alt="论文标志" style="height:50px; vertical-align:middle; margin-right:6px;">
-              阅读论文 →
-            </a>
-          </div>
-        </article>
-
-        <article class="card" style="padding:14px">
-          <div class="proj-img">6 自由度机械臂</div>
-          <h3 class="project-title">6 自由度机械臂 URDF 与控制</h3>
-          <div class="meta">
-            带夹爪 mimic 关节、关节限位及 ros2_control 集成，支持位置与力矩控制器。
-          </div>
-
-          <div style="margin-top:12px">
-            <a href="https://www.youtube.com/watch?v=IXoSNhc9wtE" target="_blank">
-              <img src="https://img.youtube.com/vi/IXoSNhc9wtE/0.jpg"
-                  alt="6 自由度机械臂演示视频"
-                  style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px">
-            </a>
-          </div>
-
-          <div style="margin-top:12px">
-            <a href="https://github.com/zimbot97/6dof_robotics_arm">查看仓库 →</a>
-          </div>
-        </article>
-
-        <article class="card" style="padding:14px">
-          <div class="proj-img">自平衡机器人</div>
-          <h3 class="project-title">两轮自平衡机器人</h3>
-
-          <div class="meta">
-            使用 <b>PID 控制</b>和实时 <b>IMU 传感器融合</b>设计并实现两轮自平衡机器人。
-            通过嵌入式硬件上的持续反馈控制实现稳定平衡。
-            <br><br>
-            <b>技术：</b>Arduino / 嵌入式 C · PID 控制 · IMU · 控制系统
-          </div>
-
-          <div style="margin-top:12px; position:relative;">
-            <a href="https://www.youtube.com/watch?v=rlDmU0SHkQA" target="_blank">
-              <img
-                src="https://img.youtube.com/vi/rlDmU0SHkQA/maxresdefault.jpg"
-                alt="自平衡机器人演示"
-                style="width:100%; aspect-ratio:16/9; object-fit:cover; border-radius:8px"
-              >
-              <div style="
-                position:absolute;
-                top:50%; left:50%;
-                transform:translate(-50%, -50%);
-                background:rgba(0,0,0,0.6);
-                border-radius:50%;
-                width:60px; height:60px;
-                display:flex;
-                align-items:center;
-                justify-content:center;
-                color:white;
-                font-size:24px;
-              ">
-                ▶
+      <div class="exp-grid">
+        <div class="exp-main">
+          <article class="card corners reveal">
+            <div class="exp-header">
+              <div>
+                <h3>ROS2 导航栈 — 系统设计与部署</h3>
+                <div class="exp-org">Braintree Technologies · 机器人软件工程师</div>
               </div>
-            </a>
-          </div>
+              <div class="exp-date">2021 — 至今</div>
+            </div>
+            <div class="exp-body">
+              为油棕与辣椒种植环境中的农业机器人设计并部署完整的 ROS2 <b>Nav2 导航系统</b>。
+              使用 <b>PCL</b> 构建点云融合流水线，集成 Livox Horizon 与 Velodyne 激光雷达 —
+              体素网格降采样、ROI 分割及欧氏聚类，实现鲁棒的障碍物检测。
+              <ul>
+                <li>自定义 Nav2 <b>全局/局部规划器</b>，针对实时密集地形优化 <b>Costmap2D 层</b></li>
+                <li><b>ROS1 → ROS2 迁移</b>：launch 文件、URDF/Xacro、插件及 Gazebo 工作流</li>
+                <li>自定义 ROS 插件、MoveIt 机械臂集成及目标检测感知流水线</li>
+                <li>硬件集成：RealSense、Jetson、Arduino、Teensy — 驱动、网络及部署</li>
+                <li>通过大量<b>实地测试</b>验证系统，覆盖多变的户外环境</li>
+              </ul>
+            </div>
+            <div class="tags" style="margin-top:18px">
+              <span class="tag">ROS1/ROS2</span><span class="tag">Nav2</span><span class="tag">C++</span>
+              <span class="tag">Python</span><span class="tag">PCL</span><span class="tag">Gazebo</span>
+              <span class="tag">Livox</span><span class="tag">Velodyne</span>
+            </div>
+          </article>
 
-          <div style="margin-top:12px">
-            <a href="https://github.com/zimbot97/Self-balancing-two-wheels-robot" target="_blank">
-              查看仓库 →
-            </a>
-            &nbsp;|&nbsp;
-            <a href="https://www.youtube.com/watch?v=rlDmU0SHkQA" target="_blank">
-              观看视频 →
-            </a>
+          <article class="card corners reveal">
+            <div class="exp-header">
+              <div>
+                <h3>移动机器人定位技术研究</h3>
+                <div class="exp-org">马来西亚理工大学 (UTM) · 哲学硕士研究员</div>
+              </div>
+              <div class="exp-date">2022 — 至今</div>
+            </div>
+            <div class="exp-body">
+              <ul style="margin-top:0">
+                <li>改进扫描匹配算法，提升定位精度与鲁棒性</li>
+                <li>构建农业仿真环境，对定位方法进行基准测试与对比</li>
+                <li>发表 AMCL / ICP / NDT 定位对比研究（IJACSA）</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <aside class="card reveal">
+          <p class="panel-label">// 部署环境</p>
+          <div class="field-photos">
+            <figure>
+              <img src="./resource/palm_oil.jpg" alt="油棕种植园部署环境" loading="lazy" />
+              <figcaption>[ 油棕种植园 ]</figcaption>
+            </figure>
+            <figure>
+              <img src="./resource/chilli.jpg" alt="辣椒农场部署环境" loading="lazy" />
+              <figcaption>[ 辣椒农场 ]</figcaption>
+            </figure>
+          </div>
+          <p class="side-note">
+            茂密植被、崎岖地形、GPS 信号受限的种植行 —
+            这些导航系统正是在这样的环境中调优与验证的。
+          </p>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ================= 项目 ================= -->
+    <section class="section" id="projects">
+      <div class="section-head reveal">
+        <span class="ghost-num">02</span>
+        <div class="section-index mono">// 项目</div>
+        <h2>精选项目</h2>
+        <p>精选作品展示 — 每个项目均可跳转至代码仓库、演示视频或已发表论文。</p>
+      </div>
+
+      <div class="projects">
+
+        <article class="card proj reveal">
+          <a class="proj-media" href="https://github.com/zimbot97/ros2_ws" target="_blank" rel="noopener">
+            <img src="./resource/proposed-high-res_1 11 Aug.png" alt="AMCL vs ICP vs NDT 轨迹对比" loading="lazy" />
+          </a>
+          <div class="proj-info">
+            <div class="proj-id">P-01 / 定位</div>
+            <h3>定位算法对比 — AMCL / ICP / NDT</h3>
+            <p class="proj-desc">
+              三种定位方法在农业仿真环境中的基准测试：
+              RPE/RTE 指标、轨迹图及误差统计。
+              已发表于 <b>IJACSA 第 16 卷</b>。
+            </p>
+            <div class="tags">
+              <span class="tag">ROS2</span><span class="tag">PCL</span><span class="tag">Python</span><span class="tag">matplotlib</span>
+            </div>
+            <div class="proj-links">
+              <a href="https://github.com/zimbot97/ros2_ws" target="_blank" rel="noopener">代码仓库 →</a>
+              <a href="https://thesai.org/Publications/ViewPaper?Volume=16&Issue=3&Code=ijacsa&SerialNo=100" target="_blank" rel="noopener">论文 →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card proj flip reveal">
+          <a class="proj-media" href="https://github.com/zimbot97/bldc_motor_test" target="_blank" rel="noopener">
+            <img src="./resource/bldc_motor_ui.png" alt="BLDC 电机控制器 Python 界面" loading="lazy" />
+          </a>
+          <div class="proj-info">
+            <div class="proj-id">P-02 / 电机控制</div>
+            <h3>BLDC 无刷电机 FOC 控制器</h3>
+            <p class="proj-desc">
+              为 2804 无刷电机设计的闭环<b>磁场定向控制（FOC）</b>速度控制器 —
+              ESP32 + DRV8313 三相驱动 + MT6701 磁性编码器（ABZ 模式），
+              配备 Python 图形界面，支持串口实时 PID 调参。
+            </p>
+            <div class="tags">
+              <span class="tag">ESP32</span><span class="tag">SimpleFOC</span><span class="tag">C++</span><span class="tag">PID</span><span class="tag">Python GUI</span>
+            </div>
+            <div class="proj-links">
+              <a href="https://github.com/zimbot97/bldc_motor_test" target="_blank" rel="noopener">代码仓库 →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card proj reveal">
+          <a class="proj-media" href="https://www.youtube.com/watch?v=IXoSNhc9wtE" target="_blank" rel="noopener">
+            <img src="https://img.youtube.com/vi/IXoSNhc9wtE/hqdefault.jpg" alt="6 自由度机械臂演示视频" loading="lazy" />
+            <span class="play-badge">▶</span>
+          </a>
+          <div class="proj-info">
+            <div class="proj-id">P-03 / 机械臂</div>
+            <h3>6 自由度机械臂 — URDF 与控制</h3>
+            <p class="proj-desc">
+              带夹爪 mimic 关节与关节限位的 URDF 模型，集成
+              <b>ros2_control</b>，支持位置与力矩控制器。
+            </p>
+            <div class="tags">
+              <span class="tag">URDF/Xacro</span><span class="tag">ros2_control</span><span class="tag">MoveIt</span>
+            </div>
+            <div class="proj-links">
+              <a href="https://github.com/zimbot97/6dof_robotics_arm" target="_blank" rel="noopener">代码仓库 →</a>
+              <a href="https://www.youtube.com/watch?v=IXoSNhc9wtE" target="_blank" rel="noopener">演示 →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="card proj flip reveal">
+          <a class="proj-media" href="https://www.youtube.com/watch?v=rlDmU0SHkQA" target="_blank" rel="noopener">
+            <img src="https://img.youtube.com/vi/rlDmU0SHkQA/maxresdefault.jpg" alt="两轮自平衡机器人演示视频" loading="lazy" />
+            <span class="play-badge">▶</span>
+          </a>
+          <div class="proj-info">
+            <div class="proj-id">P-04 / 控制系统</div>
+            <h3>两轮自平衡机器人</h3>
+            <p class="proj-desc">
+              基于<b>PID 控制</b>与嵌入式硬件上的实时 <b>IMU 传感器融合</b>，
+              实现两轮倒立摆机器人的稳定平衡。
+            </p>
+            <div class="tags">
+              <span class="tag">Arduino</span><span class="tag">嵌入式 C</span><span class="tag">PID</span><span class="tag">IMU</span>
+            </div>
+            <div class="proj-links">
+              <a href="https://github.com/zimbot97/Self-balancing-two-wheels-robot" target="_blank" rel="noopener">代码仓库 →</a>
+              <a href="https://www.youtube.com/watch?v=rlDmU0SHkQA" target="_blank" rel="noopener">演示 →</a>
+            </div>
           </div>
         </article>
 
       </div>
     </section>
 
-    <!-- Resume -->
-    <section id="resume" style="margin-top:22px">
-      <h2 style="margin-bottom:8px">简历</h2>
-      <div class="two-col" style="margin-top:12px">
-        <div class="card resume-card">
+    <!-- ================= 3D 展示 ================= -->
+    <section class="section" id="showcase">
+      <div class="section-head reveal">
+        <span class="ghost-num">03</span>
+        <div class="section-index mono">// 3D 展示</div>
+        <h2>高斯泼溅（Gaussian Splatting）展示</h2>
+        <p>基于高斯泼溅技术、直接在浏览器中渲染的交互式三维重建。拖动旋转，滚轮缩放，右键拖动平移。</p>
+      </div>
 
-          <!-- Experience -->
-          <div style="font-weight:800">工作经验</div>
-          <div style="color:var(--muted)">
-            机器人软件工程师 — Braintree Technologies（2021 年至今）
-            <ul style="margin-top:8px;color:var(--muted)">
-              <li>使用 ROS1/ROS2 和 C++ 为自主机器人设计并实现导航系统。</li>
-              <li>应用机器学习技术提升自主性与决策性能。</li>
-              <li>在 Gazebo 中开发仿真工作流，并通过实地测试验证系统。</li>
-              <li>处理和分析传感器数据（包括图像、点云和 IMU 输入），用于实时定位与感知。</li>
-              <li>设计并实现自定义 ROS 插件，扩展系统功能并优化机器人性能。</li>
-              <li>集成 MoveIt 用于机械臂运动规划与操作任务。</li>
-              <li>实现目标检测与感知流水线，支持环境感知交互。</li>
-              <li>搭建和配置机器人 Linux 系统，包括设备驱动、网络及部署环境。</li>
-              <li>集成 RealSense、Jetson、Arduino 和 Teensy 等硬件，支持原型开发与部署。</li>
-              <li>与客户、供应商及跨学科团队协调，交付可靠的机器人解决方案。</li>
-            </ul>
+      <div class="card corners splat-card reveal">
+        <div class="splat-stage" id="splat-stage"
+             data-msg-Searching="正在查找模型文件…"
+             data-msg-Loading="正在加载点云模型…（可能需要一些时间）"
+             data-msg-Ready="加载完成 — 拖动旋转，滚轮缩放"
+             data-msg-Notfound="未找到模型 — 请上传至 resource/scene.splat"
+             data-msg-Badformat="不支持的格式 — 请使用 .ply / .splat / .ksplat"
+             data-msg-Error="模型加载失败 — 请查看浏览器控制台">
+          <div class="splat-placeholder" id="splat-placeholder">
+            <div class="reticle" aria-hidden="true"></div>
+            <p>3D 场景查看器 — 点击<b>加载 3D 模型</b>获取并渲染高斯泼溅扫描场景。</p>
           </div>
+        </div>
+        <div class="splat-toolbar">
+          <div class="splat-status mono" id="splat-status">待机</div>
+          <div class="splat-actions">
+            <button class="btn btn-ghost" id="splat-file-btn">打开本地文件…</button>
+            <button class="btn btn-primary" id="splat-load">加载 3D 模型</button>
+            <input type="file" id="splat-file" accept=".ply,.splat,.ksplat" hidden />
+          </div>
+        </div>
+      </div>
 
-          <!-- Postgraduate Experience -->
-          <div style="font-weight:800;margin-top:12px">研究生经历</div>
-          <div style="color:var(--muted)">
-            哲学硕士研究员，马来西亚理工大学（2022 年至今）
-            <ul style="margin-top:8px;color:var(--muted)">
-              <li>开展移动机器人定位技术的前沿研究</li>
-              <li>改进扫描匹配算法，提升定位精度与鲁棒性</li>
-              <li>构建农业仿真环境，对定位方法进行基准测试与对比</li>
-              <li>开展前沿技术文献综述，为研究方向提供依据</li>
-            </ul>
-          </div>
+      <p class="splat-hint reveal">
+        查看器由 <a href="https://github.com/mkkellogg/GaussianSplats3D" target="_blank" rel="noopener">GaussianSplats3D</a> 驱动。
+        托管模型路径为 <code>resource/scene.splat</code>（亦支持 <code>.ksplat</code> 或 <code>.ply</code>）。
+      </p>
+    </section>
 
-          <!-- Education -->
-          <div style="font-weight:800;margin-top:12px">学历</div>
-          <div class="meta">
-            马来西亚理工大学（UTM）— 哲学硕士（机器人与定位）（2022 年至今）
-          </div>
-          <div class="meta" style="margin-top:4px">
-            马来西亚理工大学（UTM）— 电子系统工程学士（2017–2021）
-          </div>
+    <!-- ================= 技能 ================= -->
+    <section class="section" id="skills">
+      <div class="section-head reveal">
+        <span class="ghost-num">04</span>
+        <div class="section-index mono">// 技能</div>
+        <h2>技能与工具</h2>
+      </div>
 
-          <div style="margin-top:12px">
-            <a class="btn btn-primary download" href="./resource/resume.pdf" download>下载简历（PDF）</a>
-            <a class="btn btn-ghost" style="margin-left:8px" href="#contact">联系我</a>
+      <div class="skills-grid">
+        <div class="card skill-group reveal">
+          <h3>自主与导航</h3>
+          <div class="chips">
+            <span class="chip">ROS / ROS2</span><span class="chip">Nav2 与规划器</span>
+            <span class="chip">SLAM（Cartographer、RTAB-Map）</span><span class="chip">MoveIt</span>
+            <span class="chip">Costmap2D 调优</span>
+          </div>
+        </div>
+        <div class="card skill-group reveal">
+          <h3>感知</h3>
+          <div class="chips">
+            <span class="chip">点云 / PCL</span><span class="chip">OpenCV</span>
+            <span class="chip">传感器融合</span><span class="chip">目标检测</span>
+            <span class="chip">激光雷达（Livox、Velodyne）</span>
+          </div>
+        </div>
+        <div class="card skill-group reveal">
+          <h3>工程能力</h3>
+          <div class="chips">
+            <span class="chip">C++ / Python</span><span class="chip">Gazebo / Ignition</span>
+            <span class="chip">嵌入式（ESP32、Teensy）</span><span class="chip">Linux 系统</span>
+            <span class="chip">Git 与 CI/CD</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= 简历 ================= -->
+    <section class="section" id="resume">
+      <div class="section-head reveal">
+        <span class="ghost-num">05</span>
+        <div class="section-index mono">// 简历</div>
+        <h2>背景经历</h2>
+      </div>
+
+      <div class="resume-grid">
+        <div class="card corners reveal">
+          <div class="timeline">
+            <div class="timeline-item">
+              <h3>机器人软件工程师</h3>
+              <div class="where">Braintree Technologies</div>
+              <div class="when">2021 — 至今</div>
+              <p>基于 ROS1/ROS2 与 C++ 的导航系统开发、机器学习辅助自主决策、
+                 Gazebo 仿真工作流、传感器数据处理（图像、点云、IMU）、
+                 自定义 ROS 插件开发，以及面向客户的田间机器人交付。</p>
+            </div>
+            <div class="timeline-item">
+              <h3>哲学硕士研究员 — 机器人与定位</h3>
+              <div class="where">马来西亚理工大学（UTM）</div>
+              <div class="when">2022 — 至今</div>
+              <p>移动机器人定位前沿研究：改进扫描匹配算法、
+                 构建农业基准仿真环境、开展前沿技术文献综述。</p>
+            </div>
+            <div class="timeline-item">
+              <h3>电子系统工程学士</h3>
+              <div class="where">马来西亚理工大学（UTM）</div>
+              <div class="when">2017 — 2021</div>
+            </div>
           </div>
         </div>
 
-        <!-- Sidebar -->
-        <aside class="card" style="padding:16px">
-          <div style="font-weight:700">技能与工具</div>
-          <div class="meta" style="margin-top:8px">
-            ROS / ROS2 · C++ · Python · PCL · OpenCV · Gazebo / Ignition · Nav2 · SLAM · Git · CI/CD
-          </div>
-
-          <div style="margin-top:12px">
-            <div style="font-weight:700">链接</div>
-            <div style="margin-top:8px;color:var(--muted)">
-              <div>GitHub: <a href="https://github.com/zimbot97">github.com/zimbot97</a></div>
-              <div>LinkedIn: <a href="https://linkedin.com/in/brianlailaphong">linkedin.com/in/brianlailaphong</a></div>
+        <aside class="resume-side">
+          <div class="card reveal">
+            <p class="panel-label">// 下载简历</p>
+            <p>提供中英文完整 PDF 版本。</p>
+            <div class="btn-row">
+              <a class="btn btn-primary" href="./resource/resume_cn.pdf" download>PDF（中文）</a>
+              <a class="btn btn-ghost" href="./resource/resume.pdf" download>PDF (EN)</a>
             </div>
+          </div>
+          <div class="card reveal">
+            <p class="panel-label">// 发表论文</p>
+            <p>
+              AMCL、ICP 与 NDT 定位方法对比分析 —
+              <a href="https://thesai.org/Publications/ViewPaper?Volume=16&Issue=3&Code=ijacsa&SerialNo=100" target="_blank" rel="noopener">IJACSA 第 16 卷第 3 期</a>
+            </p>
+          </div>
+          <div class="card reveal">
+            <p class="panel-label">// 链接</p>
+            <p>
+              GitHub — <a href="https://github.com/zimbot97" target="_blank" rel="noopener">github.com/zimbot97</a><br />
+              LinkedIn — <a href="https://linkedin.com/in/brianlailaphong" target="_blank" rel="noopener">linkedin.com/in/brianlailaphong</a>
+            </p>
           </div>
         </aside>
       </div>
     </section>
 
-    <!-- Contact -->
-    <section id="contact" style="margin-top:22px">
-      <h2 style="margin-bottom:8px">联系我</h2>
-      <div class="card" style="padding:18px;display:flex;flex-direction:column;gap:10px">
-        <div class="meta">邮箱：<a href="mailto:brian_llh@hotmail.com">brian_llh@hotmail.com</a></div>
-        <div class="meta">所在地：马来西亚</div>
-
-        <a class="btn btn-primary"
-          href="mailto:brian_llh@hotmail.com?subject=Contact from Website&body=Hi Brian,">
-          发送邮件
-        </a>
+    <!-- ================= 联系 ================= -->
+    <section class="section" id="contact">
+      <div class="card corners contact-card reveal">
+        <div class="section-index mono">// 06 — 联系</div>
+        <h2>一起打造自主机器人。</h2>
+        <p>欢迎机器人工程职位、研究合作及有趣的田间机器人项目洽谈。目前常驻马来西亚。</p>
+        <a class="btn btn-primary" href="mailto:brian_llh@hotmail.com?subject=Contact from Website&body=Hi Brian,">发送邮件</a>
+        <div class="contact-links">
+          <a href="mailto:brian_llh@hotmail.com">brian_llh@hotmail.com</a>
+          <a href="https://github.com/zimbot97" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://linkedin.com/in/brianlailaphong" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
       </div>
     </section>
 
-  </div>
+  </main>
 
-  <script>
-    const root = document.documentElement;
-    const toggleBtn = document.getElementById("theme-toggle");
+  <footer>
+    <div class="wrap footer-inner">
+      <div>© 2026 Brian Lai — 机器人软件工程师</div>
+      <div class="mono">nav · perception · slam · ros2</div>
+    </div>
+  </footer>
 
-    const savedTheme = localStorage.getItem("theme");
-    if (savedTheme) {
-      root.setAttribute("data-theme", savedTheme);
-    } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      root.setAttribute("data-theme", "dark");
-    }
-
-    toggleBtn.addEventListener("click", () => {
-      if (root.getAttribute("data-theme") === "dark") {
-        root.setAttribute("data-theme", "light");
-        localStorage.setItem("theme", "light");
-      } else {
-        root.setAttribute("data-theme", "dark");
-        localStorage.setItem("theme", "dark");
-      }
-    });
-  </script>
+  <script src="./assets/main.js" type="module"></script>
 
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XYKCB21JE3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-XYKCB21JE3');
-</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XYKCB21JE3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XYKCB21JE3');
+  </script>
 </body>
 </html>

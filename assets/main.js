@@ -176,6 +176,7 @@
 
 const SPLAT_CONFIG = {
   candidates: [
+    "./assets/ply/fire_hydrant.splat",
     "./resource/scene.ksplat",
     "./resource/scene.splat",
     "./resource/scene.ply",
@@ -275,9 +276,36 @@ const SPLAT_CONFIG = {
         throw new Error("No hosted splat model found at " + SPLAT_CONFIG.candidates.join(", "));
       }
       setStatus(msg("Loading"));
-      await startViewer(url);
+      const ext = url.split(".").pop().toLowerCase();
+      await startViewer(url, ext);
     })
   );
+
+  // Auto-load the hosted model as soon as the viewer is on screen.
+  const autoLoad = () =>
+    guard(async () => {
+      setStatus(msg("Searching"));
+      const url = await findHostedModel();
+      if (!url) {
+        setStatus(msg("Notfound"));
+        throw new Error("No hosted splat model found at " + SPLAT_CONFIG.candidates.join(", "));
+      }
+      setStatus(msg("Loading"));
+      const ext = url.split(".").pop().toLowerCase();
+      await startViewer(url, ext);
+    });
+
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries, obs) => {
+      if (entries.some((e) => e.isIntersecting)) {
+        obs.disconnect();
+        autoLoad();
+      }
+    }, { rootMargin: "200px" });
+    io.observe(stage);
+  } else {
+    autoLoad();
+  }
 
   fileBtn.addEventListener("click", () => fileInput.click());
   fileInput.addEventListener("change", () => {

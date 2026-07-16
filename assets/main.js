@@ -176,7 +176,7 @@
 
 const SPLAT_CONFIG = {
   candidates: [
-    "./assets/ply/fire_hydrant.splat",
+    "./assets/ply/fire_hydrant.ksplat",
     "./resource/scene.ksplat",
     "./resource/scene.splat",
     "./resource/scene.ply",

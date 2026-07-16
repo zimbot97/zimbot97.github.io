@@ -691,6 +691,92 @@ img { max-width: 100%; display: block; }
 }
 
 /* ============================================================
+   URDF viewer (reuses splat viewer look)
+   ============================================================ */
+
+.urdf-card { padding: 0; overflow: hidden; }
+
+.urdf-stage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px),
+    radial-gradient(640px 320px at 50% 42%, var(--accent-soft), transparent 70%),
+    var(--surface-2);
+  background-size: 40px 40px, 40px 40px, auto, auto;
+}
+
+.urdf-stage canvas { display: block; width: 100% !important; height: 100% !important; }
+
+.urdf-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  padding: 24px;
+}
+.urdf-placeholder .reticle {
+  width: 64px; height: 64px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  position: relative;
+  opacity: 0.75;
+}
+.urdf-placeholder .reticle::before,
+.urdf-placeholder .reticle::after { content: ""; position: absolute; background: var(--accent); }
+.urdf-placeholder .reticle::before { left: 50%; top: -8px; bottom: -8px; width: 1px; transform: translateX(-50%); }
+.urdf-placeholder .reticle::after { top: 50%; left: -8px; right: -8px; height: 1px; transform: translateY(-50%); }
+.urdf-placeholder p { color: var(--muted); font-size: 14px; margin: 0; max-width: 52ch; }
+
+.urdf-toolbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding: 16px 22px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.urdf-status { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; align-self: center; }
+.urdf-status::before { content: "> "; color: var(--accent); }
+
+.urdf-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  gap: 8px 20px;
+  flex: 1 1 340px;
+  max-width: 560px;
+}
+
+.urdf-slider {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+}
+.urdf-slider span { color: var(--muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.urdf-slider input[type="range"] {
+  width: 100%;
+  accent-color: var(--accent);
+  height: 4px;
+  cursor: pointer;
+}
+
+@media (max-width: 640px) {
+  .urdf-controls { grid-template-columns: 1fr; }
+  .urdf-slider { grid-template-columns: 110px 1fr; }
+}
+
+/* ============================================================
    Skills
    ============================================================ */
 

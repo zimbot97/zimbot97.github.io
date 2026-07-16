@@ -19,6 +19,9 @@
   {
     "imports": {
       "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+      "three/examples/jsm/": "https://unpkg.com/three@0.160.0/examples/jsm/",
+      "urdf-loader": "https://unpkg.com/urdf-loader@0.12.6/src/URDFLoader.js",
       "@mkkellogg/gaussian-splats-3d": "https://unpkg.com/@mkkellogg/gaussian-splats-3d@0.4/build/gaussian-splats-3d.module.js"
     }
   }
@@ -41,6 +44,7 @@
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
         <a href="#showcase">3D Scan</a>
+        <a href="#urdf">Robot Model</a>
         <a href="#resume">Resume</a>
         <a href="#contact">Contact</a>
         <a class="lang" href="./index_zh.html">中文</a>
@@ -334,10 +338,42 @@
       </p>
     </section>
 
+    <!-- ================= URDF Viewer ================= -->
+    <section class="section" id="urdf">
+      <div class="section-head reveal">
+        <span class="ghost-num">04</span>
+        <div class="section-index mono">// Robot Model</div>
+        <h2>Interactive URDF viewer</h2>
+        <p>The 6-DOF arm's URDF rendered live in your browser from its original meshes. Drag to orbit, scroll to zoom, right-drag to pan — and move the joint sliders to pose the arm.</p>
+      </div>
+
+      <div class="card corners urdf-card reveal">
+        <div class="urdf-stage" id="urdf-stage">
+          <div class="urdf-placeholder" id="urdf-placeholder">
+            <div class="reticle" aria-hidden="true"></div>
+            <p>Loading robot model…</p>
+          </div>
+        </div>
+        <div class="urdf-toolbar">
+          <div class="urdf-status mono" id="urdf-status">idle</div>
+          <div class="urdf-controls" id="urdf-controls"></div>
+          <div class="splat-actions">
+            <button class="btn btn-ghost" id="urdf-reset">Reset pose</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="splat-hint reveal">
+        Viewer powered by <a href="https://github.com/gkjohnson/urdf-loaders" target="_blank" rel="noopener">urdf-loader</a> and
+        <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a>.
+        Model source: <a href="https://github.com/zimbot97/6dof_robotics_arm" target="_blank" rel="noopener">6dof_robotics_arm</a>.
+      </p>
+    </section>
+
     <!-- ================= Skills ================= -->
     <section class="section" id="skills">
       <div class="section-head reveal">
-        <span class="ghost-num">04</span>
+        <span class="ghost-num">05</span>
         <div class="section-index mono">// Skills</div>
         <h2>Skills &amp; tools</h2>
       </div>
@@ -373,7 +409,7 @@
     <!-- ================= Resume ================= -->
     <section class="section" id="resume">
       <div class="section-head reveal">
-        <span class="ghost-num">05</span>
+        <span class="ghost-num">06</span>
         <div class="section-index mono">// Resume</div>
         <h2>Background</h2>
       </div>
@@ -434,7 +470,7 @@
     <!-- ================= Contact ================= -->
     <section class="section" id="contact">
       <div class="card corners contact-card reveal">
-        <div class="section-index mono">// 06 — Contact</div>
+        <div class="section-index mono">// 07 — Contact</div>
         <h2>Let's build something autonomous.</h2>
         <p>Open to robotics engineering roles, research collaborations, and interesting field-robotics problems. Based in Malaysia.</p>
         <a class="btn btn-primary" href="mailto:brian_llh@hotmail.com?subject=Contact from Website&body=Hi Brian,">Send an email</a>
@@ -456,6 +492,7 @@
   </footer>
 
   <script src="./assets/main.js" type="module"></script>
+  <script src="./assets/urdf.js" type="module"></script>
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-XYKCB21JE3"></script>

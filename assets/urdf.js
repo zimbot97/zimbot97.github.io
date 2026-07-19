@@ -20,11 +20,10 @@ import URDFLoader from "urdf-loader";
   const URDF_URL = "./assets/urdf/robotics_arm.urdf";
   const PACKAGES = { robotics_arm_description: "./assets/urdf" };
 
-  // Joints hidden from the slider panel: the finger joints all mimic gripper_joint,
-  // and gripper_base_joint is driven by the pick demos — so only gripper_joint is
-  // exposed for the end effector.
+  // Hidden from the slider panel: the finger joints all mimic gripper_joint, so
+  // they get no slider. The exposed end-effector joints are gripper_base_joint
+  // (wrist rotation before the fingers) and gripper_joint (open/close).
   const HIDDEN_JOINTS = new Set([
-    "gripper_base_joint",
     "right_outer_joint", "right_inner_joint", "left_inner_joint",
     "left_knuckle_joint", "left_finger_joint",
   ]);

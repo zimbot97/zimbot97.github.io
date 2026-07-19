@@ -43,8 +43,8 @@
       <div class="nav-links" id="nav-links">
         <a href="#experience">Experience</a>
         <a href="#projects">Projects</a>
-        <a href="#showcase">3D Scan</a>
         <a href="#urdf">Robot Model</a>
+        <a href="#showcase">3D Scan</a>
         <a href="#resume">Resume</a>
         <a href="#contact">Contact</a>
         <a class="lang" href="./index_zh.html">中文</a>
@@ -297,13 +297,68 @@
           </div>
         </article>
 
+        <article class="card proj reveal">
+          <a class="proj-media" href="https://github.com/zimbot97/VLM-Police-Patrol" target="_blank" rel="noopener">
+            <img src="./resource/vlm_police_patrol.png" alt="VLM Police Patrol — autonomous ROS2 robot with on-device vision-language model" loading="lazy" />
+          </a>
+          <div class="proj-info">
+            <div class="proj-id">P-05 / AUTONOMY + VLM</div>
+            <h3>VLM Police Patrol</h3>
+            <p class="proj-desc">
+              A ROS2 patrol robot that maps, navigates, and finds a person of interest
+              by appearance — running an <b>on-device vision-language model</b> at the edge.
+              Combines gmapping/AMCL localization with a YOLO gate and <b>InternVL</b> for
+              attribute matching, then drops a map marker at the suspect's pose.
+            </p>
+            <div class="tags">
+              <span class="tag">ROS2 Humble</span><span class="tag">VLM / InternVL</span><span class="tag">YOLO</span>
+              <span class="tag">micro-ROS</span><span class="tag">RDK X5</span><span class="tag">AMCL</span>
+            </div>
+            <div class="proj-links">
+              <a href="https://github.com/zimbot97/VLM-Police-Patrol" target="_blank" rel="noopener">Repo →</a>
+            </div>
+          </div>
+        </article>
+
       </div>
+    </section>
+
+    <!-- ================= URDF Viewer ================= -->
+    <section class="section" id="urdf">
+      <div class="section-head reveal">
+        <span class="ghost-num">03</span>
+        <div class="section-index mono">// Robot Model</div>
+        <h2>Interactive URDF viewer</h2>
+        <p>The 6-DOF arm's URDF rendered live in your browser from its original meshes. Drag to orbit, scroll to zoom, right-drag to pan — and move the joint sliders to pose the arm.</p>
+      </div>
+
+      <div class="card corners urdf-card reveal">
+        <div class="urdf-stage" id="urdf-stage">
+          <div class="urdf-placeholder" id="urdf-placeholder">
+            <div class="reticle" aria-hidden="true"></div>
+            <p>Loading robot model…</p>
+          </div>
+        </div>
+        <div class="urdf-toolbar">
+          <div class="urdf-status mono" id="urdf-status">idle</div>
+          <div class="urdf-controls" id="urdf-controls"></div>
+          <div class="splat-actions">
+            <button class="btn btn-ghost" id="urdf-reset">Reset pose</button>
+          </div>
+        </div>
+      </div>
+
+      <p class="splat-hint reveal">
+        Viewer powered by <a href="https://github.com/gkjohnson/urdf-loaders" target="_blank" rel="noopener">urdf-loader</a> and
+        <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a>.
+        Model source: <a href="https://github.com/zimbot97/6dof_robotics_arm" target="_blank" rel="noopener">6dof_robotics_arm</a>.
+      </p>
     </section>
 
     <!-- ================= 3D Showcase ================= -->
     <section class="section" id="showcase">
       <div class="section-head reveal">
-        <span class="ghost-num">03</span>
+        <span class="ghost-num">04</span>
         <div class="section-index mono">// 3D Scan</div>
         <h2>Gaussian splat showcase</h2>
         <p>An interactive 3D reconstruction rendered directly in your browser with Gaussian splatting. Drag to orbit, scroll to zoom, right-drag to pan.</p>
@@ -335,38 +390,6 @@
       <p class="splat-hint reveal">
         Viewer powered by <a href="https://github.com/mkkellogg/GaussianSplats3D" target="_blank" rel="noopener">GaussianSplats3D</a>.
         The hosted model is served from <code>resource/scene.splat</code> (also accepts <code>.ksplat</code> or <code>.ply</code>).
-      </p>
-    </section>
-
-    <!-- ================= URDF Viewer ================= -->
-    <section class="section" id="urdf">
-      <div class="section-head reveal">
-        <span class="ghost-num">04</span>
-        <div class="section-index mono">// Robot Model</div>
-        <h2>Interactive URDF viewer</h2>
-        <p>The 6-DOF arm's URDF rendered live in your browser from its original meshes. Drag to orbit, scroll to zoom, right-drag to pan — and move the joint sliders to pose the arm.</p>
-      </div>
-
-      <div class="card corners urdf-card reveal">
-        <div class="urdf-stage" id="urdf-stage">
-          <div class="urdf-placeholder" id="urdf-placeholder">
-            <div class="reticle" aria-hidden="true"></div>
-            <p>Loading robot model…</p>
-          </div>
-        </div>
-        <div class="urdf-toolbar">
-          <div class="urdf-status mono" id="urdf-status">idle</div>
-          <div class="urdf-controls" id="urdf-controls"></div>
-          <div class="splat-actions">
-            <button class="btn btn-ghost" id="urdf-reset">Reset pose</button>
-          </div>
-        </div>
-      </div>
-
-      <p class="splat-hint reveal">
-        Viewer powered by <a href="https://github.com/gkjohnson/urdf-loaders" target="_blank" rel="noopener">urdf-loader</a> and
-        <a href="https://threejs.org" target="_blank" rel="noopener">three.js</a>.
-        Model source: <a href="https://github.com/zimbot97/6dof_robotics_arm" target="_blank" rel="noopener">6dof_robotics_arm</a>.
       </p>
     </section>
 
@@ -454,6 +477,19 @@
             <p>
               Comparative analysis of AMCL, ICP &amp; NDT localization —
               <a href="https://thesai.org/Publications/ViewPaper?Volume=16&Issue=3&Code=ijacsa&SerialNo=100" target="_blank" rel="noopener">IJACSA, Vol. 16 No. 3</a>
+            </p>
+          </div>
+          <div class="card reveal">
+            <p class="panel-label">// Honors &amp; competitions</p>
+            <p>
+              <b>RoboCup Asia-Pacific 2019</b> — Moscow, Russia<br />
+              Team Leader, UTM robotics team — led system architecture and autonomous
+              navigation/perception development.
+            </p>
+            <p style="margin-top:12px">
+              <b>RoboCup Asia-Pacific 2018</b> — <b>2nd Place</b><br />
+              Team Leader, Team Innokai (UTM) — robot system integration and navigation
+              algorithm development.
             </p>
           </div>
           <div class="card reveal">

@@ -21,6 +21,7 @@ import URDFLoader from "urdf-loader";
   let renderer, scene, camera, controls, robot;
   let started = false;
   const initialAngles = {};
+  const jointInputs = {};
 
   function init() {
     scene = new THREE.Scene();
@@ -147,8 +148,12 @@ import URDFLoader from "urdf-loader";
     robot.position.y -= box.min.y;
 
     controls.target.set(center.x, size.y * 0.45, center.z);
-    const dist = maxDim * 2.1;
-    camera.position.set(dist, dist * 0.8, dist);
+    const dist = maxDim * 1.25;
+    camera.position.set(
+      controls.target.x + dist,
+      controls.target.y + dist * 0.55,
+      controls.target.z + dist
+    );
     camera.near = maxDim / 100;
     camera.far = maxDim * 50;
     camera.updateProjectionMatrix();
@@ -183,25 +188,50 @@ import URDFLoader from "urdf-loader";
       input.step = (max - min) / 200 || 0.01;
       input.value = val;
       input.addEventListener("input", () => {
+        cancelReset();
         robot.setJointValue(name, Number(input.value));
       });
       row.appendChild(span);
       row.appendChild(input);
       controlsWrap.appendChild(row);
+      jointInputs[name] = input;
     });
   }
 
+  let resetRaf = 0;
+  function cancelReset() {
+    if (resetRaf) { cancelAnimationFrame(resetRaf); resetRaf = 0; }
+  }
+
+  function animateReset(duration = 700) {
+    if (!robot) return;
+    cancelReset();
+    const names = Object.keys(initialAngles);
+    const from = names.map((n) => Number(robot.joints[n].angle) || 0);
+    const to = names.map((n) => initialAngles[n]);
+    // Frame count derived from duration; requestAnimationFrame supplies timestamps.
+    let t = 0;
+    const steps = Math.max(1, Math.round(duration / 16));
+    const tick = () => {
+      t += 1;
+      const raw = Math.min(t / steps, 1);
+      const e = raw < 0.5 ? 2 * raw * raw : 1 - Math.pow(-2 * raw + 2, 2) / 2; // easeInOutQuad
+      names.forEach((n, i) => {
+        const v = from[i] + (to[i] - from[i]) * e;
+        robot.setJointValue(n, v);
+        if (jointInputs[n]) jointInputs[n].value = v;
+      });
+      if (raw < 1) {
+        resetRaf = requestAnimationFrame(tick);
+      } else {
+        resetRaf = 0;
+      }
+    };
+    resetRaf = requestAnimationFrame(tick);
+  }
+
   if (resetBtn) {
-    resetBtn.addEventListener("click", () => {
-      if (!robot) return;
-      Object.keys(initialAngles).forEach((name) => {
-        robot.setJointValue(name, initialAngles[name]);
-      });
-      controlsWrap.querySelectorAll("input[type=range]").forEach((inp, i) => {
-        const name = Object.keys(initialAngles)[i];
-        if (name != null) inp.value = initialAngles[name];
-      });
-    });
+    resetBtn.addEventListener("click", () => animateReset());
   }
 
   function boot() {

@@ -20,8 +20,11 @@ import URDFLoader from "urdf-loader";
   const URDF_URL = "./assets/urdf/robotics_arm.urdf";
   const PACKAGES = { robotics_arm_description: "./assets/urdf" };
 
-  // gripper_joint drives the fingers; these joints mimic it, so they get no slider.
-  const MIMIC = new Set([
+  // Joints hidden from the slider panel: the finger joints all mimic gripper_joint,
+  // and gripper_base_joint is driven by the pick demos — so only gripper_joint is
+  // exposed for the end effector.
+  const HIDDEN_JOINTS = new Set([
+    "gripper_base_joint",
     "right_outer_joint", "right_inner_joint", "left_inner_joint",
     "left_knuckle_joint", "left_finger_joint",
   ]);
@@ -177,12 +180,25 @@ import URDFLoader from "urdf-loader";
   function setPose(p) {
     Object.keys(p).forEach((n) => robot.setJointValue(n, p[n]));
   }
+
+  // Grasp point cached in the gripper_base local frame: the midpoint between the
+  // fingertips (not the finger joint origins), so it lands where objects are held.
+  let tcpLocal = null;
+  function computeTcpLocal() {
+    robot.setJointValue("gripper_joint", GRIP_OPEN);
+    robot.updateMatrixWorld(true);
+    const lc = new THREE.Box3().setFromObject(robot.links.left_finger).getCenter(new THREE.Vector3());
+    const rc = new THREE.Box3().setFromObject(robot.links.right_finger).getCenter(new THREE.Vector3());
+    const mid = lc.add(rc).multiplyScalar(0.5);
+    const base = new THREE.Vector3();
+    robot.links.gripper_base.getWorldPosition(base);
+    // Nudge from the finger centers toward the tips along the gripper's forward axis.
+    mid.add(mid.clone().sub(base).multiplyScalar(0.25));
+    tcpLocal = robot.links.gripper_base.worldToLocal(mid.clone());
+  }
   function tcpWorld() {
     robot.updateMatrixWorld(true);
-    const a = new THREE.Vector3(), b = new THREE.Vector3();
-    robot.links.left_finger.getWorldPosition(a);
-    robot.links.right_finger.getWorldPosition(b);
-    return a.add(b).multiplyScalar(0.5);
+    return robot.links.gripper_base.localToWorld(tcpLocal.clone());
   }
 
   // Solve joint_1..3 (grid + local refine) to bring the gripper to `target`.
@@ -232,6 +248,7 @@ import URDFLoader from "urdf-loader";
 
   // Build a short table with a graspable cube + ball the arm can actually reach.
   function buildScene() {
+    computeTcpLocal();
     const bbox = new THREE.Box3().setFromObject(robot);
     const H = Math.max(...bbox.getSize(new THREE.Vector3()).toArray()) || 0.5;
     const cubeSide = H * 0.055;
@@ -246,22 +263,32 @@ import URDFLoader from "urdf-loader";
     const cubePoses = solvePoses(tCube, H);
     const ballPoses = solvePoses(tBall, H);
 
+    // Where the gripper *actually* ends up in each grasp pose (IK is approximate),
+    // so props sit exactly in the gripper rather than at the requested target.
+    setPose(cubePoses.grasp);
+    const gCube = tcpWorld();
+    setPose(ballPoses.grasp);
+    const gBall = tcpWorld();
+
     // Restore the home pose after all the IK probing.
     setPose(homePose());
     robot.setJointValue("gripper_joint", GRIP_OPEN);
     robot.updateMatrixWorld(true);
 
+    // Table top meets the underside of the props.
+    const topY = Math.max(0.02, Math.min(gCube.y, gBall.y) - half);
+
     // Table.
-    const minX = Math.min(tCube.x, tBall.x), maxX = Math.max(tCube.x, tBall.x);
-    const minZ = Math.min(tCube.z, tBall.z), maxZ = Math.max(tCube.z, tBall.z);
+    const minX = Math.min(gCube.x, gBall.x), maxX = Math.max(gCube.x, gBall.x);
+    const minZ = Math.min(gCube.z, gBall.z), maxZ = Math.max(gCube.z, gBall.z);
     const margin = H * 0.14;
     const tw = (maxX - minX) + margin * 2;
     const td = (maxZ - minZ) + margin * 2;
     const table = new THREE.Mesh(
-      new THREE.BoxGeometry(tw, tableTop, td),
+      new THREE.BoxGeometry(tw, topY, td),
       new THREE.MeshStandardMaterial({ color: 0x6b4f3a, roughness: 0.9, metalness: 0.0 })
     );
-    table.position.set((minX + maxX) / 2, tableTop / 2, (minZ + maxZ) / 2);
+    table.position.set((minX + maxX) / 2, topY / 2, (minZ + maxZ) / 2);
     table.castShadow = true; table.receiveShadow = true;
     scene.add(table);
     props.table = table;
@@ -271,7 +298,7 @@ import URDFLoader from "urdf-loader";
       new THREE.BoxGeometry(cubeSide, cubeSide, cubeSide),
       new THREE.MeshStandardMaterial({ color: 0x2dd4bf, metalness: 0.1, roughness: 0.5 })
     );
-    cube.position.copy(tCube);
+    cube.position.copy(gCube);
     cube.castShadow = true; cube.receiveShadow = true;
     cube.userData = { home: { pos: cube.position.clone(), quat: cube.quaternion.clone() }, poses: cubePoses };
     scene.add(cube);
@@ -282,7 +309,7 @@ import URDFLoader from "urdf-loader";
       new THREE.SphereGeometry(ballR, 24, 18),
       new THREE.MeshStandardMaterial({ color: 0xf59e0b, metalness: 0.1, roughness: 0.35 })
     );
-    ball.position.copy(tBall);
+    ball.position.copy(gBall);
     ball.castShadow = true; ball.receiveShadow = true;
     ball.userData = { home: { pos: ball.position.clone(), quat: ball.quaternion.clone() }, poses: ballPoses };
     scene.add(ball);
@@ -294,7 +321,7 @@ import URDFLoader from "urdf-loader";
     controlsWrap.innerHTML = "";
     Object.keys(robot.joints).forEach((name) => {
       const j = robot.joints[name];
-      if (j.jointType === "fixed" || MIMIC.has(name)) return;
+      if (j.jointType === "fixed" || HIDDEN_JOINTS.has(name)) return;
 
       const lower = Number(j.limit.lower);
       const upper = Number(j.limit.upper);

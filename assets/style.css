@@ -748,13 +748,31 @@ img { max-width: 100%; display: block; }
 .urdf-status { font-size: 12px; color: var(--muted); letter-spacing: 0.04em; align-self: center; }
 .urdf-status::before { content: "> "; color: var(--accent); }
 
+.urdf-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1 1 340px;
+  max-width: 560px;
+}
+
 .urdf-controls {
   display: grid;
   grid-template-columns: repeat(2, minmax(180px, 1fr));
   gap: 8px 20px;
-  flex: 1 1 340px;
-  max-width: 560px;
 }
+
+.urdf-tabs {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.urdf-tabs-label { font-size: 11px; color: var(--muted); letter-spacing: 0.04em; margin-right: 4px; }
+.urdf-tab { padding: 8px 16px; font-size: 13px; }
+.urdf-tab:disabled { opacity: 0.45; cursor: default; }
 
 .urdf-slider {
   display: grid;

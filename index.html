@@ -341,7 +341,14 @@
         </div>
         <div class="urdf-toolbar">
           <div class="urdf-status mono" id="urdf-status">idle</div>
-          <div class="urdf-controls" id="urdf-controls"></div>
+          <div class="urdf-panel">
+            <div class="urdf-controls" id="urdf-controls"></div>
+            <div class="urdf-tabs" id="urdf-tabs">
+              <span class="urdf-tabs-label mono">// interactions</span>
+              <button class="btn btn-ghost urdf-tab" data-action="pick-cube">Pick cube</button>
+              <button class="btn btn-ghost urdf-tab" data-action="pick-ball">Pick ball</button>
+            </div>
+          </div>
           <div class="splat-actions">
             <button class="btn btn-ghost" id="urdf-reset">Reset pose</button>
           </div>

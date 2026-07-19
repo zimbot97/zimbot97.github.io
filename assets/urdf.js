@@ -83,7 +83,6 @@ import URDFLoader from "urdf-loader";
 
     resize();
     window.addEventListener("resize", resize);
-    animate();
   }
 
   function resize() {
@@ -94,10 +93,20 @@ import URDFLoader from "urdf-loader";
     camera.updateProjectionMatrix();
   }
 
-  function animate() {
-    requestAnimationFrame(animate);
+  // Render only while the viewer is on-screen and the tab is visible, so the
+  // WebGL scene + shadow map aren't burning frames in the background.
+  let rafId = 0;
+  let onScreen = false;
+  function renderLoop() {
+    rafId = requestAnimationFrame(renderLoop);
     if (controls) controls.update();
     if (renderer && scene && camera) renderer.render(scene, camera);
+  }
+  function startLoop() {
+    if (!rafId && renderer && !document.hidden) renderLoop();
+  }
+  function stopLoop() {
+    if (rafId) { cancelAnimationFrame(rafId); rafId = 0; }
   }
 
   function loadRobot() {
@@ -455,13 +464,20 @@ import URDFLoader from "urdf-loader";
     loadRobot();
   }
 
-  // Lazy-load when the section scrolls into view.
+  // Lazy-load on first scroll-in, then start/stop the render loop with visibility.
   if ("IntersectionObserver" in window) {
-    const io = new IntersectionObserver((entries, obs) => {
-      if (entries.some((e) => e.isIntersecting)) { obs.disconnect(); boot(); }
-    }, { rootMargin: "300px" });
+    const io = new IntersectionObserver((entries) => {
+      onScreen = entries.some((e) => e.isIntersecting);
+      if (onScreen) { boot(); startLoop(); }
+      else stopLoop();
+    }, { rootMargin: "200px" });
     io.observe(stage);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) stopLoop();
+      else if (onScreen) startLoop();
+    });
   } else {
     boot();
+    startLoop();
   }
 })();

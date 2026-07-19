@@ -105,9 +105,10 @@
   const hudScan = document.getElementById("hud-scan");
   let frame = 0;
 
+  let cachedAccent = accentColor();
   function draw() {
     ctx.clearRect(0, 0, w, h);
-    const color = accentColor();
+    const color = cachedAccent;
     // cloud sits right of the hero text on desktop, centered on mobile
     const cx = w > 820 ? w * 0.74 : w * 0.5;
     const cy = h * 0.56;
@@ -150,16 +151,34 @@
     return;
   }
 
-  (function loop() {
+  let rafId = 0;
+  let onScreen = true;
+  function loop() {
+    rafId = requestAnimationFrame(loop);
     angle += 0.0022;
     scan = (scan + 0.004) % 1.2;
+    if (++frame % 30 === 0) cachedAccent = accentColor(); // pick up theme changes
     draw();
-    if (hudScan && ++frame % 6 === 0) {
+    if (hudScan && frame % 6 === 0) {
       const deg = String(Math.round(((angle * 180) / Math.PI) % 360)).padStart(3, "0");
       hudScan.textContent = "SCAN " + deg + "°";
     }
-    requestAnimationFrame(loop);
-  })();
+  }
+  function start() { if (!rafId && !document.hidden) loop(); }
+  function stop() { if (rafId) { cancelAnimationFrame(rafId); rafId = 0; } }
+  start();
+
+  // The hero is only at the top of the page — stop animating once it scrolls away.
+  if ("IntersectionObserver" in window) {
+    new IntersectionObserver((entries) => {
+      onScreen = entries.some((e) => e.isIntersecting);
+      if (onScreen) start(); else stop();
+    }, { rootMargin: "100px" }).observe(canvas);
+  }
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stop();
+    else if (onScreen) start();
+  });
 })();
 
 /* ---------------- Gaussian splat viewer ----------------
@@ -295,14 +314,24 @@ const SPLAT_CONFIG = {
       await startViewer(url, ext);
     });
 
+  // Auto-load on first scroll-in, then pause/resume the splat renderer with
+  // visibility so it doesn't keep rendering off-screen or in a hidden tab.
+  let stageVisible = false;
+  let loaded = false;
+  const resumeViewer = () => { if (viewer && stageVisible && !document.hidden) viewer.start(); };
+  const pauseViewer = () => { if (viewer && typeof viewer.stop === "function") viewer.stop(); };
+
   if ("IntersectionObserver" in window) {
-    const io = new IntersectionObserver((entries, obs) => {
-      if (entries.some((e) => e.isIntersecting)) {
-        obs.disconnect();
-        autoLoad();
-      }
+    const io = new IntersectionObserver((entries) => {
+      stageVisible = entries.some((e) => e.isIntersecting);
+      if (stageVisible && !loaded) { loaded = true; autoLoad(); }
+      else if (stageVisible) resumeViewer();
+      else pauseViewer();
     }, { rootMargin: "200px" });
     io.observe(stage);
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) pauseViewer(); else resumeViewer();
+    });
   } else {
     autoLoad();
   }
